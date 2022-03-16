@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat");
+* {
+  font-family: "Montserrat";
+}
+body {
+  background: radial-gradient(
+    circle,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
+}
+.card {
+  height: 100%;
+  border-radius: 20px;
+}
+.col-lg-6 .img {
+  width: 90%;
+  align-self: center;
+}
