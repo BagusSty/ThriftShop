@@ -11,10 +11,32 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat");
+      * {
+        font-family: "Montserrat";
+      }
+      body {
+        background: radial-gradient(
+          circle,
+          rgba(238, 174, 202, 1) 0%,
+          rgba(148, 187, 233, 1) 100%
+        );
+      }
+      .card {
+        background-color: #f4f4f4;
+        height: 100%;
+        border-radius: 20px;
+      }
+      .col-lg-6 .img {
+        width: 75%;
+        align-self: center;
+      }
+    </style>
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="card border-0">
+    <div class="container-fluid m-4">
+      <div class="card border-0 m-3 p-5">
         <div class="row d-flex">
           <div class="col-lg-6">
             <img class="img img-fluid" src="assets/img/3255317.jpg" alt="" />
@@ -22,7 +44,7 @@
           <div class="col-lg-6">
             <form class="form" action="#" method="post">
               <div class="row px-3">
-                <h2 class="title">LOGIN</h2>
+                <h2 class="title"><b>LOGIN</b></h2>
               </div>
               <div class="row px-3">
                 <label for="username" class="mb-1 text-sm">Username </label>
