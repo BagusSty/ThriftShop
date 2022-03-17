@@ -34,16 +34,19 @@ if(!isset ($_SESSION['username'])){
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">Daftar Barang</a>
+                    <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="#">Daftar Transaksi</a>
+                    <a href="#"><i class='fas fa-box'></i> Daftar Barang</a>
                 </li>
                 <li>
-                    <a href="#">Daftar Supplier</a>
+                    <a href="#"><i class='fas fa-money-check-alt'></i> Daftar Transaksi</a>
                 </li>
                 <li>
-                    <a href="../logout.php">Log Out</a>
+                    <a href="#"><i class='fas fa-truck'></i> Daftar Supplier</a>
+                </li>
+                <li>
+                    <a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Log Out</a>
                 </li>
             </ul>
         </nav>
@@ -55,9 +58,105 @@ if(!isset ($_SESSION['username'])){
                     <button type="button" id="sidebarCollapse" class="btn">
                         <i class="fas fa-align-left"></i>
                     </button>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="dropdown-profil" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-fw fa-user"></i> <?php echo $_SESSION['username']; ?>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown-profil">
+                            <li><a class="dropdown-item" href="#">Profil</a></li>
+                            <li><a class="dropdown-item" href="../logout.php">Log Out</a></li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
+            <div>
+                <?php
+                    $tanggal = mktime(date('m'), date("d"), date('Y'));
+                    date_default_timezone_set("Asia/Jakarta");
+                    $hari = date ("D");
+                    switch($hari){
+                        case 'Sun':
+                            $hari_ini = "Minggu";
+                        break;
 
+                        case 'Mon':
+                            $hari_ini = "Senin";
+                        break;
+
+                        case 'Tue':
+                            $hari_ini = "Selasa";
+                        break;
+
+                        case 'Wed':
+                            $hari_ini = "Rabu";
+                        break;
+
+                        case 'Thu':
+                            $hari_ini = "Kamis";
+                        break;
+
+                        case 'Fri':
+                            $hari_ini = "Jumat";
+                        break;
+
+                        case 'Sat':
+                            $hari_ini = "Sabtu";
+                        break;
+
+                        default:
+                            $hari_ini = "Tidak di ketahui";
+                        break;
+                    }
+                    $jam = date ("H:i:s");
+                    $a = date ("H");
+                    if (($a>=6) && ($a<=11)) {
+                        echo " <h4>Selamat Pagi, ". $_SESSION['username']."</h4>";
+                        echo "<h4>".$hari_ini.",".date("d-m-Y", $tanggal )."</h4>";
+                    }else if(($a>=11) && ($a<=15)){
+                        echo " <h4>Selamat Pagi, ". $_SESSION['username']."</h4>";
+                        echo "<h4>".$hari_ini.",".date("d-m-Y", $tanggal )."</h4>";
+                    }elseif(($a>15) && ($a<=18)){
+                        echo " <h4>Selamat Siang, ". $_SESSION['username']."</h4>";
+                        echo "<h4>".$hari_ini.",".date("d-m-Y", $tanggal )."</h4>";
+                    }else{
+                        echo " <h4>Selamat Malam, ". $_SESSION['username']."</h4>";
+                        echo "<h4>".$hari_ini.", ".date("d-m-Y", $tanggal )."</h4>";
+                    }
+                    ?>
+                    <hr>
+                    <div class="row text-white">
+                        <div class="card bg-info m-4" style="width: 18rem;">
+                            <div class="card-body">
+                                <div class="card-body-icon text-white">
+                                    <i class='fas fa-box'></i>
+                                </div>
+                                <h5 class="card-title">Data Barang</h5>
+                                <p class="display-4">1200</p>
+                                <a href="#"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
+                            </div>
+                        </div>
+                        <div class="card bg-success m-4" style="width: 18rem;">
+                            <div class="card-body">
+                                <div class="card-body-icon text-white">
+                                    <i class='fas fa-user'></i>
+                                </div>
+                                <h5 class="card-title">Data User</h5>
+                                <p class="display-4">1200</p>
+                                <a href="#"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
+                            </div>
+                        </div>
+                        <div class="card bg-danger m-4" style="width: 18rem;">
+                            <div class="card-body">
+                                <div class="card-body-icon text-white">
+                                    <i class='fas fa-money-check-alt'></i>
+                                </div>
+                                <h5 class="card-title">Data Transaksi</h5>
+                                <p class="display-4">1200</p>
+                                <a href="#"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
         </div>
     </div>
 

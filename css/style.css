@@ -1,18 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto");
 * {
-  font-family: "Montserrat";
+  font-family: "Roboto";
 }
 body {
   background-color: #fafafa;
-  padding-top: 50px;
+  margin-top: 50px;
 }
 p {
   font-size: 1.1em;
   font-weight: 300;
   line-height: 1.7em;
-  color: #999;
+  color: #fff;
 }
-
+span {
+  font-size: large;
+  font-weight: bold;
+}
 a,
 a:hover,
 a:focus {
@@ -29,6 +32,12 @@ a:focus {
   z-index: 20;
   background-color: #54bab9;
   margin-bottom: 40px;
+}
+.navbar .dropdown button {
+  margin-right: 40px;
+}
+.dropdown-toggle::after {
+  content: none;
 }
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -87,6 +96,17 @@ ul ul a {
   padding: 20px;
   min-height: 100vh;
   transition: all 0.3s;
+}
+.display-4 {
+  font-weight: 700;
+}
+.card-body-icon {
+  position: absolute;
+  z-index: 0;
+  top: 25px;
+  right: 4px;
+  opacity: 0.4;
+  font-size: 80px;
 }
 
 /* ---------------------------------------------------
