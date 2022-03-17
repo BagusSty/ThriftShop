@@ -17,13 +17,21 @@
   <body>
     <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
       <div class="card border-0 m-3 p-4 border-0">
+        <!--Pesan gagal login-->
+        <?php
+        if(isset($_GET['pesan'])) {
+          if($_GET['pesan']=="gagal") {
+            echo "<div class='alert'>Username dan Password tidak sesuai !</div>";
+          }
+        }
+        ?>
         <div class="row d-flex p-5">
           <div class="col-lg-6">
             <img class="img img-fluid" src="assets/img/3255317.jpg" alt="" />
           </div>
           <div class="col-lg-6">
             <!--Form Login-->
-            <form class="form form-group p-lg-5" action="#" method="post">
+            <form class="form form-group p-lg-5" action="proses_login.php" method="post">
               <div class="row px-3">
                 <h2 class="title"><b>LOGIN</b></h2>
               </div>
