@@ -5,13 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--Boostrap-->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <!--CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">>
     <link rel="stylesheet" href="css/stylesheet.css" />
   </head>
   <body>
@@ -31,7 +25,7 @@
           </div>
           <div class="col-lg-6">
             <!--Form Login-->
-            <form class="form form-group p-lg-5" action="proses_login.php" method="post">
+            <form class="form form-group p-sm-5" action="proses_login.php" method="post">
               <div class="row px-3">
                 <h2 class="title"><b>LOGIN</b></h2>
               </div>
@@ -55,13 +49,13 @@
             </form>
           </div>
         </div>
-      </div>
-      <div class="row px-3 text-center">
+        <div class="row px-3 text-center">
         <footer>
           <small class="ml-4 ml-sm-5 mb-2"
             >Copyright &copy; 2022. All rights reserved.</small
           >
         </footer>
+      </div>
       </div>
     </div>
   </body>
