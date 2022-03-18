@@ -4,7 +4,7 @@
 }
 body {
   background-color: #fafafa;
-  margin-top: 50px;
+  top: 50px;
 }
 p {
   font-size: 1.1em;
@@ -23,7 +23,9 @@ a:focus {
   text-decoration: none;
   transition: all 0.3s;
 }
-
+.btn {
+  color: #fafafa;
+}
 .navbar {
   position: fixed;
   top: 0;

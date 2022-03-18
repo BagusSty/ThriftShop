@@ -46,7 +46,7 @@ if(!isset ($_SESSION['username'])){
                     <a href="#"><i class='fas fa-truck'></i> Daftar Supplier</a>
                 </li>
                 <li>
-                    <a href="../logout.php"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                    <a onclick="return confirm('Anda yakin ingin logout ?')" href="../logout.php"><i class="fas fa-sign-out-alt"></i>Log Out</a>
                 </li>
             </ul>
         </nav>
@@ -63,13 +63,14 @@ if(!isset ($_SESSION['username'])){
                             <i class="fa fa-fw fa-user"></i> <?php echo $_SESSION['username']; ?>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdown-profil">
-                            <li><a class="dropdown-item" href="#">Profil</a></li>
-                            <li><a class="dropdown-item" href="../logout.php">Log Out</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa fa-fw fa-user"></i> Profil</a></li>
+                            <li><a class="dropdown-item" href="../logout.php" onclick="return confirm('Anda yakin ingin logout ?')" ><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
                         </ul>
                     </div>
                 </div>
             </nav>
             <div>
+                <!--PHP Tanggal-->
                 <?php
                     $tanggal = mktime(date('m'), date("d"), date('Y'));
                     date_default_timezone_set("Asia/Jakarta");
@@ -131,7 +132,10 @@ if(!isset ($_SESSION['username'])){
                                     <i class='fas fa-box'></i>
                                 </div>
                                 <h5 class="card-title">Data Barang</h5>
-                                <p class="display-4">1200</p>
+                                <?php
+                                $tb_barang = mysqli_query($conn, "SELECT * FROM tb_barang");
+                                echo "<p class='display-4'>".mysqli_num_rows($tb_barang)."</p>";
+                                ?>
                                 <a href="#"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
                             </div>
                         </div>
@@ -141,8 +145,11 @@ if(!isset ($_SESSION['username'])){
                                     <i class='fas fa-user'></i>
                                 </div>
                                 <h5 class="card-title">Data User</h5>
-                                <p class="display-4">1200</p>
-                                <a href="#"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
+                                <?php
+                                $tb_obat = mysqli_query($conn, "SELECT * FROM tb_user");
+                                echo "<p class='display-4'>".mysqli_num_rows($tb_obat)."</p>";
+                                ?>
+                                <a href="data_user.php"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
                             </div>
                         </div>
                         <div class="card bg-danger m-4" style="width: 18rem;">
@@ -151,7 +158,10 @@ if(!isset ($_SESSION['username'])){
                                     <i class='fas fa-money-check-alt'></i>
                                 </div>
                                 <h5 class="card-title">Data Transaksi</h5>
-                                <p class="display-4">1200</p>
+                                <?php
+                                $tb_transaksi = mysqli_query($conn, "SELECT * FROM tb_transaksi");
+                                echo "<p class='display-4'>".mysqli_num_rows($tb_transaksi)."</p>";
+                                ?>
                                 <a href="#"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
                             </div>
                         </div>
