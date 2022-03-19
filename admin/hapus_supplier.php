@@ -1,7 +1,7 @@
 <?php
 include '../config.php';
-if(!isset ($_SESSION['username'])){
-    header("Location:../index.php");
+if(!isset ($_SESSION['nama'])){
+	header("Location:../index.php");
 }
 
 if (isset($_GET['id'])) {

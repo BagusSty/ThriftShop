@@ -13,14 +13,14 @@ if (isset($_POST['submit'])) {
 	if($cek['tipe_user']=="1"){
 		$_POST['username'] = $username;
     	$_POST['password'] = $password;
-		$_SESSION['username'] = $_POST['username'];
+		$_SESSION['nama'] = $cek['nama'];
 		$_SESSION['tipe_user']=$cek['tipe_user'];
 		header("location:admin/beranda_admin.php");
 	}
 	else if($cek['tipe_user']=="2") {
 		$_POST['username'] = $username;
      	$_POST['password'] = $password;
-		 $_SESSION['username'] = $_POST['username'];
+		$_SESSION['nama'] = $cek['nama'];
 		$_SESSION['tipe_user']=$cek['tipe_user'];
 		header("location:manager/beranda_manager.php");
 
@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 	else if($cek['tipe_user']=="3") {
 		$_POST['username'] = $username;
     	$_POST['password'] = $password;
-		$_SESSION['username'] = $_POST['username'];
+		$_SESSION['nama'] = $cek['nama'];
 		$_SESSION['tipe_user']=$cek['tipe_user'];
 		header("location:kasir/manager_kasir.php");
 	} else {

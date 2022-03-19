@@ -6,14 +6,15 @@ if(!isset ($_SESSION['nama'])){
 }
 
 if (isset($_POST['simpan'])) {
-    $nama = $_POST['nama'];
-    $nohp = $_POST['no_hp'];
-    $alamat = $_POST['alamat'];
-    $qry = "INSERT INTO tb_supplier(nama_supplier,no_hp_supplier,alamat_supplier) VALUES ('$nama','$nohp','$alamat')";
+    $id = $_POST['id_barang'];
+    $stok = $_POST['stok'];
+    $hrg_pokok = $_POST['harga_pokok'];
+    $hrg_jual = $_POST['harga_jual'];
+    $qry = "UPDATE tb_barang SET stok='$stok', harga_pokok='$hrg_pokok',  harga_jual='$hrg_jual' WHERE id_barang='$id'";
     $input = mysqli_query($conn,$qry);
     if ($input== true) {
         echo '<script>alert("Data Tersimpan")</script>';
-        header('location:data_supplier.php');
+        header('location:data_Aadmin.php');
     } else {
         echo '<script>alert("Data Gagal Tersimpan")</script>';
         die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));

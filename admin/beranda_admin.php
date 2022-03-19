@@ -1,7 +1,7 @@
 <?php
 session_start();
 include '../config.php';
-if(!isset ($_SESSION['username'])){
+if(!isset ($_SESSION['nama'])){
     header("Location:../index.php");
 }
 ?>
@@ -37,7 +37,7 @@ if(!isset ($_SESSION['username'])){
                     <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="#"><i class='fas fa-box'></i> Daftar Barang</a>
+                    <a href="data_barang.php"><i class='fas fa-box'></i> Daftar Barang</a>
                 </li>
                 <li>
                     <a href="#"><i class='fas fa-money-check-alt'></i> Daftar Transaksi</a>
@@ -60,7 +60,7 @@ if(!isset ($_SESSION['username'])){
                     </button>
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" id="dropdown-profil" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-fw fa-user"></i> <?php echo $_SESSION['username']; ?>
+                            <i class="fa fa-fw fa-user"></i> <?php echo $_SESSION['nama']; ?>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdown-profil">
                             <li><a class="dropdown-item" href="#"><i class="fa fa-fw fa-user"></i> Profil</a></li>
@@ -72,100 +72,100 @@ if(!isset ($_SESSION['username'])){
             <div class="mt-5">
                 <!--PHP Tanggal-->
                 <?php
-                    $tanggal = mktime(date('m'), date("d"), date('Y'));
-                    date_default_timezone_set("Asia/Jakarta");
-                    $hari = date ("D");
-                    switch($hari){
-                        case 'Sun':
-                            $hari_ini = "Minggu";
-                        break;
+                $tanggal = mktime(date('m'), date("d"), date('Y'));
+                date_default_timezone_set("Asia/Jakarta");
+                $hari = date ("D");
+                switch($hari){
+                    case 'Sun':
+                    $hari_ini = "Minggu";
+                    break;
 
-                        case 'Mon':
-                            $hari_ini = "Senin";
-                        break;
+                    case 'Mon':
+                    $hari_ini = "Senin";
+                    break;
 
-                        case 'Tue':
-                            $hari_ini = "Selasa";
-                        break;
+                    case 'Tue':
+                    $hari_ini = "Selasa";
+                    break;
 
-                        case 'Wed':
-                            $hari_ini = "Rabu";
-                        break;
+                    case 'Wed':
+                    $hari_ini = "Rabu";
+                    break;
 
-                        case 'Thu':
-                            $hari_ini = "Kamis";
-                        break;
+                    case 'Thu':
+                    $hari_ini = "Kamis";
+                    break;
 
-                        case 'Fri':
-                            $hari_ini = "Jumat";
-                        break;
+                    case 'Fri':
+                    $hari_ini = "Jumat";
+                    break;
 
-                        case 'Sat':
-                            $hari_ini = "Sabtu";
-                        break;
+                    case 'Sat':
+                    $hari_ini = "Sabtu";
+                    break;
 
-                        default:
-                            $hari_ini = "Tidak di ketahui";
-                        break;
-                    }
-                    $jam = date ("H:i:s");
-                    $a = date ("H");
-                    if (($a>=6) && ($a<=11)) {
-                        echo " <h4>Selamat Pagi, ". $_SESSION['username']."</h4>";
-                        echo "<h4>".$hari_ini.",".date("d-m-Y", $tanggal )."</h4>";
-                    }else if(($a>=11) && ($a<=15)){
-                        echo " <h4>Selamat Pagi, ". $_SESSION['username']."</h4>";
-                        echo "<h4>".$hari_ini.",".date("d-m-Y", $tanggal )."</h4>";
-                    }elseif(($a>15) && ($a<=18)){
-                        echo " <h4>Selamat Siang, ". $_SESSION['username']."</h4>";
-                        echo "<h4>".$hari_ini.",".date("d-m-Y", $tanggal )."</h4>";
-                    }else{
-                        echo " <h4>Selamat Malam, ". $_SESSION['username']."</h4>";
-                        echo "<h4>".$hari_ini.", ".date("d-m-Y", $tanggal )."</h4>";
-                    }
-                    ?>
-                    <hr>
-                    <div class="row text-white">
-                        <div class="card bg-info m-4" style="width: 18rem;">
-                            <div class="card-body">
-                                <div class="card-body-icon text-white">
-                                    <i class='fas fa-box'></i>
-                                </div>
-                                <h5 class="card-title">Data Barang</h5>
-                                <?php
-                                $tb_barang = mysqli_query($conn, "SELECT * FROM tb_barang");
-                                echo "<p class='display-4'>".mysqli_num_rows($tb_barang)."</p>";
-                                ?>
-                                <a href="#"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
+                    default:
+                    $hari_ini = "Tidak di ketahui";
+                    break;
+                }
+                $jam = date ("H:i:s");
+                $a = date ("H");
+                if (($a>=6) && ($a<=11)) {
+                    echo " <h4>Selamat Pagi, ". $_SESSION['nama']."</h4>";
+                    echo "<h4>".$hari_ini.",".date("d-m-Y", $tanggal )."</h4>";
+                }else if(($a>=11) && ($a<=15)){
+                    echo " <h4>Selamat Pagi, ". $_SESSION['nama']."</h4>";
+                    echo "<h4>".$hari_ini.",".date("d-m-Y", $tanggal )."</h4>";
+                }elseif(($a>15) && ($a<=18)){
+                    echo " <h4>Selamat Siang, ". $_SESSION['nama']."</h4>";
+                    echo "<h4>".$hari_ini.",".date("d-m-Y", $tanggal )."</h4>";
+                }else{
+                    echo " <h4>Selamat Malam, ". $_SESSION['nama']."</h4>";
+                    echo "<h4>".$hari_ini.", ".date("d-m-Y", $tanggal )."</h4>";
+                }
+                ?>
+                <hr>
+                <div class="row text-white">
+                    <div class="card bg-info m-4" style="width: 18rem;">
+                        <div class="card-body">
+                            <div class="card-body-icon text-white">
+                                <i class='fas fa-box'></i>
                             </div>
-                        </div>
-                        <div class="card bg-success m-4" style="width: 18rem;">
-                            <div class="card-body">
-                                <div class="card-body-icon text-white">
-                                    <i class='fas fa-user'></i>
-                                </div>
-                                <h5 class="card-title">Data User</h5>
-                                <?php
-                                $tb_user = mysqli_query($conn, "SELECT * FROM tb_user");
-                                echo "<p class='display-4'>".mysqli_num_rows($tb_user)."</p>";
-                                ?>
-                                <a href="data_user.php"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
-                            </div>
-                        </div>
-                        <div class="card bg-danger m-4" style="width: 18rem;">
-                            <div class="card-body">
-                                <div class="card-body-icon text-white">
-                                    <i class='fas fa-money-check-alt'></i>
-                                </div>
-                                <h5 class="card-title">Data Transaksi</h5>
-                                <?php
-                                $tb_transaksi = mysqli_query($conn, "SELECT * FROM tb_transaksi");
-                                echo "<p class='display-4'>".mysqli_num_rows($tb_transaksi)."</p>";
-                                ?>
-                                <a href="#"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
-                            </div>
+                            <h5 class="card-title">Data Barang</h5>
+                            <?php
+                            $tb_barang = mysqli_query($conn, "SELECT * FROM tb_barang");
+                            echo "<p class='display-4'>".mysqli_num_rows($tb_barang)."</p>";
+                            ?>
+                            <a href="data_barang.php"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
                         </div>
                     </div>
+                    <div class="card bg-success m-4" style="width: 18rem;">
+                        <div class="card-body">
+                            <div class="card-body-icon text-white">
+                                <i class='fas fa-user'></i>
+                            </div>
+                            <h5 class="card-title">Data User</h5>
+                            <?php
+                            $tb_user = mysqli_query($conn, "SELECT * FROM tb_user");
+                            echo "<p class='display-4'>".mysqli_num_rows($tb_user)."</p>";
+                            ?>
+                            <a href="data_user.php"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
+                        </div>
+                    </div>
+                    <div class="card bg-danger m-4" style="width: 18rem;">
+                        <div class="card-body">
+                            <div class="card-body-icon text-white">
+                                <i class='fas fa-money-check-alt'></i>
+                            </div>
+                            <h5 class="card-title">Data Transaksi</h5>
+                            <?php
+                            $tb_transaksi = mysqli_query($conn, "SELECT * FROM tb_transaksi");
+                            echo "<p class='display-4'>".mysqli_num_rows($tb_transaksi)."</p>";
+                            ?>
+                            <a href="#"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include '../config.php';
-if(!isset ($_SESSION['username'])){
+if(!isset ($_SESSION['nama'])){
     header("Location:../index.php");
 }
 
@@ -25,7 +25,7 @@ if (isset($_POST['simpan'])) {
     }
     else if ($_POST['jabatan']=='Manager') {
         $tipe_user = '2';
-         $qry = "UPDATE tb_user SET nama='$nama', username='$username', no_hp='$nohp',  password='$password', tipe_user='$tipe_user' WHERE id_user='$id'";
+        $qry = "UPDATE tb_user SET nama='$nama', username='$username', no_hp='$nohp',  password='$password', tipe_user='$tipe_user' WHERE id_user='$id'";
         $input = mysqli_query($conn,$qry);
         if ($input== true) {
             echo '<script>alert("Data Tersimpan")</script>';
@@ -37,7 +37,7 @@ if (isset($_POST['simpan'])) {
     }
     else if ($_POST['jabatan']=='Kasir') {
         $tipe_user = '3';
-         $qry = "UPDATE tb_user SET nama='$nama', username='$username', no_hp='$nohp',  password='$password', tipe_user='$tipe_user' WHERE id_user='$id'";
+        $qry = "UPDATE tb_user SET nama='$nama', username='$username', no_hp='$nohp',  password='$password', tipe_user='$tipe_user' WHERE id_user='$id'";
         $input = mysqli_query($conn,$qry);
         if ($input== true) {
             echo '<script>alert("Data Tersimpan")</script>';
