@@ -90,8 +90,8 @@ if(!isset ($_SESSION['username'])){
                                 <input type="tel" class="form-control" name="no_hp" placeholder="08xxxxxxxxxx" pattern="08[0-9]{10}" maxlength="15" required/>
                             </div>
                             <div class="mb-3">
-                                <label for="username" class="form-label">Alamat</label>
-                                <input type="text" name="username" class="form-control" required>
+                                <label for="alamat" class="form-label">Alamat</label>
+                                <input type="text" name="alamat" class="form-control" required>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" value="Simpan" name="simpan" class="btn btn-primary">Tambah</button>
@@ -140,11 +140,11 @@ if(!isset ($_SESSION['username'])){
                                             </div>
                                             <div class="mb-3">
                                                 <label for="tel" class="form-label">No HP</label>
-                                                <input type="tel" id="no_hp" value="<?= $dt_supplier['no_hp'];?>" class="form-control" name="no_hp" placeholder="08xxxxxxxxxx" pattern="08[0-9]{10}" maxlength="15" required/>
+                                                <input type="tel" id="no_hp" value="<?= $dt_supplier['no_hp_supplier'];?>" class="form-control" name="no_hp" placeholder="08xxxxxxxxxx" pattern="08[0-9]{10}" maxlength="15" required/>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="username" class="form-label">Username</label>
-                                                <input type="text" id="username" value="<?= $dt_supplier['alamat_supplier'];?>" name="username" class="form-control" required>
+                                                <label for="alamat" class="form-label">Alamat</label>
+                                                <input type="text" id="alamat" value="<?= $dt_supplier['alamat_supplier'];?>" name="alamat" class="form-control" required>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" value="update" name="simpan" class="btn btn-primary">Update</button>
@@ -155,7 +155,7 @@ if(!isset ($_SESSION['username'])){
                                 </div>
                                 </div>
                                 <button class="btn">
-                                    <a href="hapus_user.php?id=<?php echo $dt_user['id_user']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
+                                    <a href="hapus_user.php?id=<?php echo $dt_supplier['id_supplier']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
                                 </button>
                             </td>
                         </tr>
