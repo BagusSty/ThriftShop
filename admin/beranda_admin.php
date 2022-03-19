@@ -146,8 +146,8 @@ if(!isset ($_SESSION['username'])){
                                 </div>
                                 <h5 class="card-title">Data User</h5>
                                 <?php
-                                $tb_obat = mysqli_query($conn, "SELECT * FROM tb_user");
-                                echo "<p class='display-4'>".mysqli_num_rows($tb_obat)."</p>";
+                                $tb_user = mysqli_query($conn, "SELECT * FROM tb_user");
+                                echo "<p class='display-4'>".mysqli_num_rows($tb_user)."</p>";
                                 ?>
                                 <a href="data_user.php"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
                             </div>
