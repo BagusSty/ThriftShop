@@ -28,7 +28,7 @@ if(!isset ($_SESSION['username'])){
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
-            <div class="sidebar-header">
+            <div class="sidebar-header mt-5">
                 <h3>Buganishogi Thrift Shop</h3>
             </div>
 
@@ -43,7 +43,7 @@ if(!isset ($_SESSION['username'])){
                     <a href="#"><i class='fas fa-money-check-alt'></i> Daftar Transaksi</a>
                 </li>
                 <li>
-                    <a href="#"><i class='fas fa-truck'></i> Daftar Supplier</a>
+                    <a href="data_supplier.php"><i class='fas fa-truck'></i> Daftar Supplier</a>
                 </li>
                 <li>
                     <a onclick="return confirm('Anda yakin ingin logout ?')" href="../logout.php"><i class="fas fa-sign-out-alt"></i>Log Out</a>
@@ -69,7 +69,7 @@ if(!isset ($_SESSION['username'])){
                     </div>
                 </div>
             </nav>
-            <div>
+            <div class="mt-5">
                 <!--PHP Tanggal-->
                 <?php
                     $tanggal = mktime(date('m'), date("d"), date('Y'));
