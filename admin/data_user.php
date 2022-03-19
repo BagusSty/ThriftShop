@@ -69,9 +69,52 @@ if(!isset ($_SESSION['username'])){
                 <div class="col-md-10 pt-5">
                     <h2><i class='fas fa-user'></i> Data Obat</h2>
                 </div>
-                <a href="input_obat.php">
-                       <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tambahuser"><i class="fa fa-male"></i> Tambah User</a>
-                </a>
+
+                 <!-- Modal Input -->
+                <button type="button" class="btn my-3" data-bs-toggle="modal" data-bs-target="#addUser"><i class="fa fa-male"></i> Tambah User</button>
+                <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addModal" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addModal">Input User Baru</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="input_user.php" method="post">
+                            <div class="mb-3">
+                                <label for="nama" class="form-label">Nama</label>
+                                <input type="text" name="nama" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tel" class="form-label">No HP</label>
+                                <input type="tel" class="form-control" name="no_hp" placeholder="08xxxxxxxxxx" pattern="08[0-9]{10}" maxlength="15" required/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" name="username" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="password">Password</label>
+                                <input type="password" name="password" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="option" class="form-label">Pilih Jabatan</label>
+                                <select name="jabatan" class="form-control" required>
+                                    <option value="">--Pilih Jabatan--</option>
+                                    <option value="Pemilik">Pemilik</option>
+                                    <option value="Manager">Manager</option>
+                                    <option value="Kasir">Kasir</option>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" value="Simpan" name="simpan" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
                 <table class="table table-sm table-striped table-bordered">
                     <tr>
                         <th>NO</th>
@@ -79,11 +122,11 @@ if(!isset ($_SESSION['username'])){
                         <th>Username</th>
                         <th>No HP</th>
                         <th>Jabatan</th>
-                        <th colspan="2">Opsi</th>
+                        <th>Opsi</th>
                     </tr>
                     <?php
                     $tb_user = mysqli_query($conn, "SELECT * FROM tb_user,tb_tipe_user WHERE tb_user.tipe_user = tb_tipe_user.tipe_user");
-                    $no=1;
+                    $no = 1;
                     while ($dt_user = $tb_user->fetch_assoc()) : ?>
                         <tr>
                             <td><?= $no++; ?></td>
@@ -92,16 +135,79 @@ if(!isset ($_SESSION['username'])){
                             <td><?= $dt_user['no_hp']; ?></td>
                             <td><?= $dt_user['jabatan'] ?></td>
                             <td>
-                                <a href="edit_obat.php?id=<?php echo $dt_user['id']?>"><i class="fas fa-edit"></i></span></a>
-                            </td>
-                            <td>
-                                <a href="hapus_obat.php?id=<?php echo $dt_user['id']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i></span></a>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUser<?php echo $dt_user['id_user'];?>">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <!-- Modal Edit -->
+                                <div class="modal fade" id="editUser<?php echo $dt_user['id_user'];?>" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editUserLabel">Edit User</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="edit_user.php" method="post">
+                                            <input type="hidden" name="id_user" value="<?= $dt_user['id_user'];?>">
+                                            <div class="mb-3">
+                                                <label for="nama" class="form-label">Nama</label>
+                                                <input type="text" id="nama" value="<?= $dt_user['nama'];?>" name="nama" class="form-control" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="tel" class="form-label">No HP</label>
+                                                <input type="tel" id="no_hp" value="<?= $dt_user['no_hp'];?>" class="form-control" name="no_hp" placeholder="08xxxxxxxxxx" pattern="08[0-9]{10}" maxlength="15" required/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="username" class="form-label">Username</label>
+                                                <input type="text" id="username" value="<?= $dt_user['username'];?>" name="username" class="form-control" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="password">Password</label>
+                                                <input type="password" id="password" value="" name="password" class="form-control" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="option" class="form-label">Pilih Jabatan</label>
+                                                <select name="jabatan" value="<?= $dt_user['jabatan'];?>" id="jabatan" class="form-control" required>
+                                                    <option value="">--Pilih Jabatan--</option>
+                                                    <option value="Pemilik">Pemilik</option>
+                                                    <option value="Manager">Manager</option>
+                                                    <option value="Kasir">Kasir</option>
+                                                </select>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" value="Simpan" name="simpan" class="btn btn-primary">Update</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <button class="btn">
+                                    <a href="hapus_user.php?id=<?php echo $dt_user['id_user']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
+                                </button>
                             </td>
                         </tr>
                     <?php endwhile ?>
                 </table>
             <div>
         </div>
+
+        <!-- Modal Edit -->
+        <div class="modal fade" id="editUser?>" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModal">Edit User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            </div>
+        </div>
+        </div>
+
         <!-- jQuery CDN -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <!-- Popper.JS -->

@@ -110,6 +110,9 @@ ul ul a {
   opacity: 0.4;
   font-size: 80px;
 }
+#content .btn {
+  background-color: #54bab9;
+}
 
 /* ---------------------------------------------------
     MEDIAQUERIES
