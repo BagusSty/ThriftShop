@@ -114,7 +114,14 @@ if(!isset ($_SESSION['nama'])){
                     </div>
                 </div>
             </div>
-
+            <form class="row float-sm-end " action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
+                <div class="form-group col-lg my-2">
+                    <input class="form-control px-3" type="text" name="cari" placeholder="Pencarian" >
+                </div>
+                <div class="col-lg my-2">
+                    <button class=" btn btn-sm p-2" type="submit" name="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
             <table class="table table-sm">
                 <tr>
                     <th>NO</th>
@@ -125,85 +132,100 @@ if(!isset ($_SESSION['nama'])){
                     <th>Opsi</th>
                 </tr>
                 <?php
-                $tb_user = mysqli_query($conn, "SELECT * FROM tb_user,tb_tipe_user WHERE tb_user.tipe_user = tb_tipe_user.tipe_user");
+                if(isset($_POST['cari'])) {
+                    $cari=$_POST['cari'];
+                    $tb_user= mysqli_query($conn,"SELECT * FROM tb_user,tb_tipe_user
+                        WHERE tb_user.tipe_user = tb_tipe_user.tipe_user AND nama like '%$cari%' or username like '%$cari%' or no_hp like '%$cari%' or jabatan like '%$cari%'") or die($conn->error);
+                } else {
+                    $tb_user = mysqli_query($conn,"SELECT * FROM tb_user,tb_tipe_user WHERE tb_user.tipe_user = tb_tipe_user.tipe_user");
+                }
                 $no = 1;
-                while ($dt_user = $tb_user->fetch_assoc()) : ?>
+                while ($dt_user = $tb_user->fetch_assoc()) {
+                    $data[] = $dt_user;
+                }
+                if (empty($data)) : ?>
                     <tr>
-                        <td><?= $no++; ?></td>
-                        <td><?= $dt_user['nama']; ?></td>
-                        <td><?= $dt_user['username'] ?></td>
-                        <td><?= $dt_user['no_hp']; ?></td>
-                        <td><?= $dt_user['jabatan'] ?></td>
-                        <td>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUser<?php echo $dt_user['id_user'];?>">
-                                <i class="fas fa-edit"></i> Edit
-                            </button>
-                            <!-- Modal Edit -->
-                            <div class="modal fade" id="editUser<?php echo $dt_user['id_user'];?>" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="editUserLabel">Edit User</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="edit_user.php" method="post">
-                                                <input type="hidden" name="id_user" value="<?= $dt_user['id_user'];?>">
-                                                <div class="mb-3">
-                                                    <label for="nama" class="form-label">Nama</label>
-                                                    <input type="text" id="nama" value="<?= $dt_user['nama'];?>" name="nama" class="form-control" required>
+                        <td colspan="">Tidak ada data</td>
+                    </tr>
+                    <?php else :?>
+                        <?php foreach ($data as $user) : ?>
+                            <tr>
+                                <td><?= $no++; ?></td>
+                                <td><?= $user['nama']; ?></td>
+                                <td><?= $user['username'] ?></td>
+                                <td><?= $user['no_hp']; ?></td>
+                                <td><?= $user['jabatan'] ?></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUser<?php echo $user['id_user'];?>">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    <!-- Modal Edit -->
+                                    <div class="modal fade" id="editUser<?php echo $user['id_user'];?>" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editUserLabel">Edit User</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="tel" class="form-label">No HP</label>
-                                                    <input type="tel" id="no_hp" value="<?= $dt_user['no_hp'];?>" class="form-control" name="no_hp" placeholder="08xxxxxxxxxx" pattern="08[0-9]{10}" maxlength="15" required/>
+                                                <div class="modal-body">
+                                                    <form action="edit_user.php" method="post">
+                                                        <input type="hidden" name="id_user" value="<?= $user['id_user'];?>">
+                                                        <div class="mb-3">
+                                                            <label for="nama" class="form-label">Nama</label>
+                                                            <input type="text" id="nama" value="<?= $user['nama'];?>" name="nama" class="form-control" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="tel" class="form-label">No HP</label>
+                                                            <input type="tel" id="no_hp" value="<?= $user['no_hp'];?>" class="form-control" name="no_hp" placeholder="08xxxxxxxxxx" pattern="08[0-9]{10}" maxlength="15" required/>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="username" class="form-label">Username</label>
+                                                            <input type="text" id="username" value="<?= $user['username'];?>" name="username" class="form-control" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="password">Password</label>
+                                                            <input type="password" id="password" value="" name="password" class="form-control" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="option" class="form-label">Pilih Jabatan</label>
+                                                            <select name="jabatan" value="<?= $user['jabatan'];?>" id="jabatan" class="form-control" required>
+                                                                <option value="">--Pilih Jabatan--</option>
+                                                                <option value="Pemilik">Pemilik</option>
+                                                                <option value="Manager">Manager</option>
+                                                                <option value="Kasir">Kasir</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" value="Simpan" name="simpan" class="btn btn-primary">Update</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="username" class="form-label">Username</label>
-                                                    <input type="text" id="username" value="<?= $dt_user['username'];?>" name="username" class="form-control" required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label" for="password">Password</label>
-                                                    <input type="password" id="password" value="" name="password" class="form-control" required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="option" class="form-label">Pilih Jabatan</label>
-                                                    <select name="jabatan" value="<?= $dt_user['jabatan'];?>" id="jabatan" class="form-control" required>
-                                                        <option value="">--Pilih Jabatan--</option>
-                                                        <option value="Pemilik">Pemilik</option>
-                                                        <option value="Manager">Manager</option>
-                                                        <option value="Kasir">Kasir</option>
-                                                    </select>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" value="Simpan" name="simpan" class="btn btn-primary">Update</button>
-                                                </div>
-                                            </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <button class="btn">
-                                <a href="hapus_user.php?id=<?php echo $dt_user['id_user']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
-                            </button>
-                        </td>
-                    </tr>
-                <?php endwhile ?>
-            </table>
-            <div>
-            </div>
+                                    <button class="btn">
+                                        <a href="hapus_user.php?id=<?php echo $user['id_user']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif ?>
+                </table>
+                <div>
+                </div>
 
-            <!-- jQuery CDN -->
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-            <!-- Popper.JS -->
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-            <!-- Bootstrap JS -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('#sidebarCollapse').on('click', function () {
-                        $('#sidebar').toggleClass('active');
+                <!-- jQuery CDN -->
+                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                <!-- Popper.JS -->
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+                <!-- Bootstrap JS -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#sidebarCollapse').on('click', function () {
+                            $('#sidebar').toggleClass('active');
+                        });
                     });
-                });
-            </script>
-        </body>
-        </html>
+                </script>
+            </body>
+            </html>
