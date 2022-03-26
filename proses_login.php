@@ -15,14 +15,14 @@ if (isset($_POST['submit'])) {
     	$_POST['password'] = $password;
 		$_SESSION['nama'] = $cek['nama'];
 		$_SESSION['tipe_user']=$cek['tipe_user'];
-		header("location:admin/beranda_admin.php");
+		header("location:users/admin/beranda_admin.php");
 	}
 	else if($cek['tipe_user']=="2") {
 		$_POST['username'] = $username;
      	$_POST['password'] = $password;
 		$_SESSION['nama'] = $cek['nama'];
 		$_SESSION['tipe_user']=$cek['tipe_user'];
-		header("location:manager/beranda_manager.php");
+		header("location:users/manager/beranda_manager.php");
 
 	}
 	else if($cek['tipe_user']=="3") {
@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
     	$_POST['password'] = $password;
 		$_SESSION['nama'] = $cek['nama'];
 		$_SESSION['tipe_user']=$cek['tipe_user'];
-		header("location:kasir/manager_kasir.php");
+		header("location:users/kasir/manager_kasir.php");
 	} else {
 		header("location:index.php?pesan=gagal");
 	}

@@ -52,15 +52,15 @@ a:focus {
 }
 
 #sidebar {
-  min-width: 250px;
-  max-width: 250px;
+  min-width: 200px;
+  max-width: 200px;
   background: #54bab9;
   color: #fff;
   transition: all 0.3s;
 }
 
 #sidebar.active {
-  margin-left: -250px;
+  margin-left: -200px;
 }
 
 #sidebar .sidebar-header {
@@ -72,7 +72,6 @@ a:focus {
 }
 
 #sidebar ul li a {
-  text-align: center;
   padding: 10px;
   font-size: 1.1em;
   display: block;

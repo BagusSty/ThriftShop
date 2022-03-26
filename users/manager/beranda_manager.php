@@ -1,4 +1,6 @@
 <?php
+mysqli_report (MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 session_start();
 include '../config.php';
 if(!isset ($_SESSION['nama'])){
@@ -34,10 +36,10 @@ if(!isset ($_SESSION['nama'])){
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="?page=manager"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="data_barang.php"><i class='fas fa-box'></i> Daftar Barang</a>
+                    <a href="?page=databarang"><i class='fas fa-box'></i> Daftar Barang</a>
                 </li>
                 <li>
                     <a href="#"><i class='fas fa-money-check-alt'></i> Daftar Transaksi</a>
@@ -122,33 +124,19 @@ if(!isset ($_SESSION['nama'])){
                 }
                 ?>
                 <hr>
-                <div class="row text-white">
-                    <div class="card bg-info m-4" style="width: 18rem;">
-                        <div class="card-body">
-                            <div class="card-body-icon text-white">
-                                <i class='fas fa-box'></i>
-                            </div>
-                            <h5 class="card-title">Data Barang</h5>
-                            <?php
-                            $tb_barang = mysqli_query($conn, "SELECT * FROM tb_barang");
-                            echo "<p class='display-4'>".mysqli_num_rows($tb_barang)."</p>";
-                            ?>
-                            <a href="data_barang.php"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
-                        </div>
-                    </div>
-                    <div class="card bg-danger m-4" style="width: 18rem;">
-                        <div class="card-body">
-                            <div class="card-body-icon text-white">
-                                <i class='fas fa-money-check-alt'></i>
-                            </div>
-                            <h5 class="card-title">Data Transaksi</h5>
-                            <?php
-                            $tb_transaksi = mysqli_query($conn, "SELECT * FROM tb_transaksi");
-                            echo "<p class='display-4'>".mysqli_num_rows($tb_transaksi)."</p>";
-                            ?>
-                            <a href="#"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
-                        </div>
-                    </div>
+                <div class="content">
+                     <?php
+                        $page = $_GET['page'];
+                        if ($page == "manager") {
+                            include "manager.php";
+                        }
+                        if ($page == "") {
+                            include "manager.php";
+                        }
+                        if ($page == "databarang") {
+                            include "../page/barang/data_barang.php";
+                        }
+                    ?>
                 </div>
             </div>
         </div>
