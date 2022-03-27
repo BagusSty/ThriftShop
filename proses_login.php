@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
 		$_SESSION['tipe_user']=$cek['tipe_user'];
 		header("location:users/kasir/manager_kasir.php");
 	} else {
-		header("location:index.php?pesan=gagal");
+		echo '<script>alert("Gagal Login")</script>';
 	}
 }
 ?>
