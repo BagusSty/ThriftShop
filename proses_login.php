@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
     	$_POST['password'] = $password;
 		$_SESSION['nama'] = $cek['nama'];
 		$_SESSION['tipe_user']=$cek['tipe_user'];
-		header("location:users/kasir/manager_kasir.php");
+		header("location:users/kasir/beranda_kasir.php");
 	} else {
 		echo '<script>alert("Gagal Login")</script>';
 	}

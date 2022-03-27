@@ -37,24 +37,59 @@ if(!isset ($_SESSION['nama'])){
             <div class="sidebar-header mt-5">
                 <h3>Buganishogi Thrift Shop</h3>
             </div>
-
+            <hr>
             <ul class="list-unstyled components">
                 <li>
                     <a href="?page=admin"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="?page=databarang"><i class='fas fa-box'></i> Daftar Barang</a>
+                    <a href="#submenu1" data-bs-toggle="collapse"><i class="fas fa-folder"></i></i> Data Master</a>
+                    <ul class="collapse list-unstyled components" id="submenu1" data-bs-parent="#menu">
+                        <li>
+                            <a href="?page=datauser"><i class='fas fa-user'></i> Data User</a>
+                        </li>
+                        <li>
+                            <a href="?page=databarang"><i class='fas fa-tshirt'></i> Data Barang</a>
+                        </li>
+                        <li>
+                            <a href="?page=datasupplier"><i class='fas fa-truck'></i> Data Supplier</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#"><i class='fas fa-money-check-alt'></i> Daftar Transaksi</a>
+                    <a href="#submenu2" data-bs-toggle="collapse"><i class='fas fa-money-check-alt'></i> Data Transaksi</a>
+                    <ul class="collapse list-unstyled componenets" id=submenu2 data-bs-parent="#menu">
+                        <li>
+                            <a href="?page=barangmasuk"><i class='fas fa-box'></i> Data Barang Masuk</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class='fas fa-dollar-sign'></i> Data Penjualan</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="?page=datasupplier"><i class='fas fa-truck'></i> Daftar Supplier</a>
+                    <a href="#submenu3" data-bs-toggle="collapse"><i class="fas fa-clipboard"></i> Laporan</a>
+                    <ul class="collapse list-unstyled componenets" id=submenu3 data-bs-parent="#menu">
+                        <li>
+                            <a href="#">Laporan Barang</a>
+                        </li>
+                        <li>
+                            <a href="#">Laporan Barang Masuk</a>
+                        </li>
+                        <li>
+                            <a href="#">Laporan Penjualan</a>
+                        </li>
+                        <li>
+                            <a href="#">Laporan Keuangan</a>
+                        </li>
+                    </ul>
                 </li>
+                <hr>
                 <li>
-                    <a onclick="return confirm('Anda yakin ingin logout ?')" href="../logout.php"><i class="fas fa-sign-out-alt"></i>Log Out</a>
+                    <a onclick="return confirm('Anda yakin ingin logout ?')" href="../../logout.php"><i class="fas fa-sign-out-alt"></i>Log Out</a>
                 </li>
             </ul>
+            <span>Copyright © 2022</span>
         </nav>
 
         <!-- Page Content  -->
@@ -70,15 +105,15 @@ if(!isset ($_SESSION['nama'])){
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdown-profil">
                             <li><a class="dropdown-item" href="#"><i class="fa fa-fw fa-user"></i> Profil</a></li>
-                            <li><a class="dropdown-item" href="../logout.php" onclick="return confirm('Anda yakin ingin logout ?')" ><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
+                            <li><a class="dropdown-item" href="../../logout.php" onclick="return confirm('Anda yakin ingin logout ?')" ><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
                         </ul>
                     </div>
                 </div>
             </nav>
             <div class="content">
-             <?php
-             $page = $_GET['page'];
-             if ($page == "admin") {
+               <?php
+               $page = $_GET['page'];
+               if ($page == "admin") {
                 include "admin.php";
             }
             if ($page == "") {
@@ -92,6 +127,9 @@ if(!isset ($_SESSION['nama'])){
             }
             if ($page == "datasupplier") {
                 include "../../page/supplier/data_supplier.php";
+            }
+            if ($page == "barangmasuk") {
+                include "../../page/barangmasuk/data_barang_masuk.php";
             }
             ?>
         </div>
@@ -115,6 +153,21 @@ if(!isset ($_SESSION['nama'])){
     $(document).ready( function () {
         $('.table').DataTable();
     })
+</script>
+<script>
+  jQuery(document).ready(function($) {
+   $('#cmb_barang').change(function() { // Jika Select Box id provinsi dipilih
+     var tamp = $(this).val(); // Ciptakan variabel provinsi
+     $.ajax({
+            type: 'POST', // Metode pengiriman data menggunakan POST
+          url: 'page/barangmasuk/get_barang.php', // File yang akan memproses data
+         data: 'tamp=' + tamp, // Data yang akan dikirim ke file pemroses
+         success: function(data) { // Jika berhasil
+              $('.tampung').html(data); // Berikan hasil ke id kota
+          }
+      });
+ });
+});
 </script>
 </body>
 
