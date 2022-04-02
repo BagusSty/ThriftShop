@@ -71,7 +71,7 @@ if(!isset ($_SESSION['nama'])){
                     <a href="#submenu3" data-bs-toggle="collapse"><i class="fas fa-clipboard"></i> Laporan</a>
                     <ul class="collapse list-unstyled componenets" id=submenu3 data-bs-parent="#menu">
                         <li>
-                            <a href="#">Laporan Barang</a>
+                            <a href="?page=laporanbarang">Laporan Barang</a>
                         </li>
                         <li>
                             <a href="#">Laporan Barang Masuk</a>
@@ -130,6 +130,9 @@ if(!isset ($_SESSION['nama'])){
             }
             if ($page == "barangmasuk") {
                 include "../../page/barangmasuk/data_barang_masuk.php";
+            }
+            if ($page == "laporanbarang") {
+                include "../../page/laporan/laporan_barang.php";
             }
             ?>
         </div>
