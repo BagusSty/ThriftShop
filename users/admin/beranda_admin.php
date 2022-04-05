@@ -16,6 +16,7 @@ if(!isset ($_SESSION['nama'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Beranda</title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <!--Data Tables-->3
     <link rel="stylesheet" type="text/css" href="../../assets/DataTables/datatables.min.css"/>
@@ -63,7 +64,7 @@ if(!isset ($_SESSION['nama'])){
                             <a href="?page=barangmasuk"><i class='fas fa-box'></i> Data Barang Masuk</a>
                         </li>
                         <li>
-                            <a href="#"><i class='fas fa-dollar-sign'></i> Data Penjualan</a>
+                            <a href="?page=transaksi"><i class='fas fa-dollar-sign'></i> Data Penjualan</a>
                         </li>
                     </ul>
                 </li>
@@ -131,6 +132,12 @@ if(!isset ($_SESSION['nama'])){
             if ($page == "barangmasuk") {
                 include "../../page/barangmasuk/data_barang_masuk.php";
             }
+            if ($page == "transaksi") {
+                include "../../page/transaksi/transaksi.php";
+            }
+            if ($page == "keranjang") {
+                include "../../page/transaksi/keranjang.php";
+            }
             if ($page == "laporanbarang") {
                 include "../../page/laporan/laporan_barang.php";
             }
@@ -141,6 +148,7 @@ if(!isset ($_SESSION['nama'])){
 </div>
 <!--Data Tables JS-->
 <script type="text/javascript" src="../../assets/DataTables/datatables.min.js"></script>
+
 <!-- Popper.JS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <!-- Bootstrap JS -->
@@ -158,20 +166,21 @@ if(!isset ($_SESSION['nama'])){
     })
 </script>
 <script>
-  jQuery(document).ready(function($) {
-   $('#cmb_barang').change(function() { // Jika Select Box id provinsi dipilih
-     var tamp = $(this).val(); // Ciptakan variabel provinsi
-     $.ajax({
-            type: 'POST', // Metode pengiriman data menggunakan POST
-          url: 'page/barangmasuk/get_barang.php', // File yang akan memproses data
-         data: 'tamp=' + tamp, // Data yang akan dikirim ke file pemroses
-         success: function(data) { // Jika berhasil
-              $('.tampung').html(data); // Berikan hasil ke id kota
-          }
-      });
- });
-});
-</script>
+      function isi(){
+        var id_barang = $("#id_barang").val();
+        $.ajax({
+          url: '../../page/barangmasuk/get_barang.php',
+        data:"id_barang="+id_barang,
+        }).success(function (data){
+          var json = data,
+          obj = JSON.parse(json);
+          $('#kategori').val(obj.kategori);
+            $('#supplier').val(obj.supplier);
+            $('#harga').val(obj.harga);
+
+        })
+      }
+      </script>
 </body>
 
 </html>

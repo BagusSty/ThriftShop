@@ -1,4 +1,3 @@
-
 <div class="col-md-10 pt-5">
     <h2><i class='fas fa-box'></i> Data Barang</h2>
 </div>
@@ -96,26 +95,23 @@
         </tr>
     </thead>
     <?php
-    $tb_barang = mysqli_query($conn,"SELECT * FROM tb_barang,tb_kategori WHERE tb_barang.id_kategori = tb_kategori.id_kategori");
+    $tb_barang = mysqli_query($conn,"SELECT * FROM tb_barang,tb_kategori");
     $no = 1;
-    while ($dt_barang = $tb_barang->fetch_assoc()) {
-        $barang[] = $dt_barang;
-    }
-    foreach ($barang as $data) : ?>
+    while ($barang = $tb_barang->fetch_assoc()) : ?>
         <tbody>
             <tr>
                 <td><?= $no++; ?></td>
-                <td><?= $data['nama_barang']; ?></td>
-                <td><?= $data['nama_kategori'] ?></td>
-                <td><?= $data['stok'] ?></td>
-                <td><?= $data['harga_pokok'] ?></td>
-                <td><?= $data['harga_jual'] ?></td>
+                <td><?= $barang['nama_barang']; ?></td>
+                <td><?= $barang['nama_kategori'] ?></td>
+                <td><?= $barang['stok'] ?></td>
+                <td><?= $barang['harga_pokok'] ?></td>
+                <td><?= $barang['harga_jual'] ?></td>
                 <td>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUser<?php echo $data['id_barang'];?>">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUser<?php echo $barang['id_barang'];?>">
                         <i class="fas fa-edit"></i> Edit
                     </button>
                     <!-- Modal Edit -->
-                    <div class="modal fade" id="editUser<?php echo $data['id_barang'];?>" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
+                    <div class="modal fade" id="editUser<?php echo $barang['id_barang'];?>" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -124,14 +120,14 @@
                                 </div>
                                 <div class="modal-body">
                                     <form method="post">
-                                        <input type="hidden" name="id_barang" value="<?= $data['id_barang'] ?>">
+                                        <input type="hidden" name="id_barang" value="<?= $barang['id_barang'] ?>">
                                         <div class="mb-3">
                                             <label for="nama" class="form-label">Nama</label>
-                                            <input type="text" name="nama" value="<?= $data['nama_barang'] ?>" class="form-control">
+                                            <input type="text" name="nama_barang" value="<?= $barang['nama_barang'] ?>" class="form-control">
                                         </div>
                                         <div class="mb-3">
                                             <label for="option" class="form-label">Pilih Kategori</label>
-                                            <select name="jabatan" class="form-control">
+                                            <select name="nama_kategori" class="form-control">
                                                 <option value="">--Pilih Kategori--</option>
                                                 <?php
                                                 $sql=mysqli_query($conn, "SELECT * FROM tb_kategori");
@@ -154,10 +150,9 @@
                     <?php
                     if (isset($_POST['edit'])) {
                         $id = $_POST['id_barang'];
-                        $stok = $_POST['stok'];
-                        $hrg_pokok = $_POST['harga_pokok'];
-                        $hrg_jual = $_POST['harga_jual'];
-                        $qry = "UPDATE tb_barang SET stok='$stok', harga_pokok='$hrg_pokok',  harga_jual='$hrg_jual' WHERE id_barang='$id'";
+                        $nama = $_POST['nama_barang'];
+                        $kategori = $_POST['nama_kategori'];
+                        $qry = "UPDATE tb_barang SET nama_barang='$nama', id_kategori='$kategori' WHERE id_barang='$id'";
                         $input = mysqli_query($conn,$qry);
                         if ($input== true) {
                             echo '<script>alert("Data Tersimpan")</script>';
@@ -168,7 +163,7 @@
                     }
                     ?>
                     <button class="btn">
-                        <a href="?page=databarang&id=<?php echo $data['id_barang']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
+                        <a href="?page=databarang&id=<?php echo $barang['id_barang']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
                     </button>
                     <?php
                     if (isset($_GET['id'])) {
@@ -176,14 +171,14 @@
                         $query = "DELETE FROM tb_barang WHERE id_barang='$id' ";
                         $hasil = mysqli_query($conn, $query);
                         if(!$hasil){
-                            echo '<script>alert("Data Terhapus")</script>';
                             die ("Gagal menghapus data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
+                        } else {
+                            header("location:../../admin/beranda_admin.php?page=databarang");
                         }
                     }
                     ?>
                 </td>
             </tr>
         </tbody>
-    </table>
-<?php endforeach; ?>
-
+    <?php endwhile; ?>
+</table>
