@@ -81,30 +81,16 @@
  											?>
  										</select>
  										<div class="mb-3">
- 											<label for="option" class="form-label">Pilih Supplier</label>
- 											<select name="supplier" class="form-control" required>
- 												<option value="">--Pilih Supplier--</option>
- 												<?php
- 												$sql=mysqli_query($conn, "SELECT * FROM tb_supplier");
- 												while ($data=mysqli_fetch_array($sql)) {
- 													?>
- 													<option value="<?=$data['id_supplier']?>"><?=$data['nama_supplier']?></option>
- 													<?php
- 												}
- 												?>
- 											</select>
- 										</div>
- 										<div class="mb-3">
  											<label for="stok" class="form-label">Stok</label>
- 											<input type="number" name="stok" class="form-control" required>
+ 											<input type="number" name="stok" class="form-control" disabled>
  										</div>
  										<div class="mb-3">
  											<label for="harga_pokok" class="form-label">Harga Pokok</label>
- 											<input type="number" name="harga_pokok" class="form-control" required>
+ 											<input type="number" name="harga_pokok" class="form-control" disabled>
  										</div>
  										<div class="mb-3">
  											<label for="harga_jual" class="form-label">Harga Jual</label>
- 											<input type="number" name="harga_jual" class="form-control" required>
+ 											<input type="number" name="harga_jual" class="form-control" disabled>
  										</div>
  									</div>
  									<div class="modal-footer">
@@ -121,7 +107,6 @@
  									$input = mysqli_query($conn,$qry);
  									if ($input== true) {
  										echo '<script>alert("Data Tersimpan")</script>';
- 										header('location:?page=databarang');
  									} else {
  										echo '<script>alert("Data Gagal Tersimpan")</script>';
  										die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
@@ -213,7 +198,7 @@
  									}
  									?>
  									<button class="btn">
- 										<a href="?page=databarang&id=<?php echo $barang['id_barang']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
+ 										<a href="?id=<?php echo $barang['id_barang']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
  									</button>
  									<?php
  									if (isset($_GET['id'])) {
@@ -223,7 +208,7 @@
  										if(!$hasil){
  											die ("Gagal menghapus data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
  										} else {
- 											header("location:../../admin/beranda_admin.php?page=databarang");
+ 											echo '<script>alert("Data Terhapus")</script>';
  										}
  									}
  									?>

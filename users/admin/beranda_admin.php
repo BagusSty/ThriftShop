@@ -185,22 +185,6 @@ include '../../config.php';
         $('.table').DataTable();
     })
 </script>
-<script>
-      function isi(){
-        var id_barang = $("#id_barang").val();
-        $.ajax({
-          url: '../../page/barangmasuk/get_barang.php',
-        data:"id_barang="+id_barang,
-        }).success(function (data){
-          var json = data,
-          obj = JSON.parse(json);
-          $('#kategori').val(obj.kategori);
-            $('#supplier').val(obj.supplier);
-            $('#harga').val(obj.harga);
-
-        })
-      }
-      </script>
 </body>
 
 </html>

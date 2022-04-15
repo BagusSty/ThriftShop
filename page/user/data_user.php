@@ -258,7 +258,7 @@
  										</div>
  									</div>
  									<button class="btn">
- 										<a href="?page=datauser&id=<?php echo $user['id_user']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
+ 										<a href="?id=<?php echo $user['id_user']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
  									</button>
  									<?php
  									if (isset($_GET['id'])) {
@@ -266,9 +266,10 @@
  										$query = "DELETE FROM tb_user WHERE id_user='$id' ";
  										$hasil = mysqli_query($conn, $query);
  										if(!$hasil){
- 											echo '<script>alert("Data Terhapus")</script>';
  											die ("Gagal menghapus data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 										}
+ 										} else {
+											 echo '<script>alert("Data Terhapus")</script>';
+										 }
  									}
  									?>
  								</td>

@@ -173,7 +173,7 @@
  									</div>
  								</div>
  								<button class="btn">
- 									<a href="?page=datasupplier&id=<?php echo $supp['id_supplier']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
+ 									<a href="?id=<?php echo $supp['id_supplier']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
  								</button>
  								<?php
  								if (isset($_GET['id'])) {
