@@ -153,7 +153,6 @@
  						<th>Harga Pokok</th>
  						<th>Jumlah</th>
  						<th>Total Harga</th>
- 						<th>Opsi</th>
  					</tr>
  				</thead>
 
@@ -167,118 +166,9 @@
  							<td><?= $barang['nama_barang']; ?></td>
  							<td><?= $barang['tanggal'] ?></td>
  							<td><?= $barang['nama_supplier']; ?></td>
- 							<td><?= $barang['harga_pokok'] ?></td>
+ 							<td><?= "Rp. ".number_format($barang['harga_pokok'],2,',','.') ?></td>
  							<td><?= $barang['jumlah_barang'] ?></td>
- 							<td><?= $barang['jumlah_harga_pokok'] ?></td>
- 							<td>
- 								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUser<?php echo $barang['id_user'];?>">
- 									<i class="fas fa-edit"></i> Edit
- 								</button>
- 								<!-- Modal Edit -->
- 								<div class="modal fade" id="editUser<?php echo $barang['barang'];?>" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
- 									<div class="modal-dialog">
- 										<div class="modal-content">
- 											<div class="modal-header">
- 												<h5 class="modal-title" id="editUserLabel">Edit User</h5>
- 												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
- 											</div>
- 											<div class="modal-body">
- 												<form method="post">
- 													<input type="hidden" name="id_user" value="<?= $barang['id_user'];?>">
- 													<div class="mb-3">
- 														<label for="nama" class="form-label">Nama</label>
- 														<input type="text" id="nama" value="<?= $barang['nama'];?>" name="nama" class="form-control" required>
- 													</div>
- 													<div class="mb-3">
- 														<label for="tel" class="form-label">No HP</label>
- 														<input type="tel" id="no_hp" value="<?= $barang['no_hp'];?>" class="form-control" name="no_hp" placeholder="08xxxxxxxxxx" pattern="08[0-9]{10}" maxlength="15" required/>
- 													</div>
- 													<div class="mb-3">
- 														<label for="username" class="form-label">Username</label>
- 														<input type="text" id="username" value="<?= $barang['username'];?>" name="username" class="form-control" required>
- 													</div>
- 													<div class="mb-3">
- 														<label class="form-label" for="password">Password</label>
- 														<input type="password" id="password" value="" name="password" class="form-control" required>
- 													</div>
- 													<div class="mb-3">
- 														<label for="option" class="form-label">Pilih Jabatan</label>
- 														<select name="jabatan" value="<?= $barang['jabatan'];?>" id="jabatan" class="form-control" required>
- 															<option value="">--Pilih Jabatan--</option>
- 															<option value="Pemilik">Pemilik</option>
- 															<option value="Manager">Manager</option>
- 															<option value="Kasir">Kasir</option>
- 														</select>
- 													</div>
- 													<div class="modal-footer">
- 														<button type="submit" value="Simpan" name="update" class="btn btn-primary">Update</button>
- 													</div>
- 												</form>
- 												<?php
- 												if (isset($_POST['update'])) {
- 													$id = $_POST['id_user'];
- 													$nama = $_POST['nama'];
- 													$username = $_POST['username'];
- 													$password = md5($_POST['password']);
- 													$nohp = $_POST['no_hp'];
- 													if ($_POST['jabatan']=='Pemilik') {
- 														$tipe_user = '1';
- 														$qry = "UPDATE tb_user SET nama='$nama', username='$username', no_hp='$nohp',  password='$password', tipe_user='$tipe_user' WHERE id_user='$id'";
- 														$input = mysqli_query($conn,$qry);
- 														if ($input== true) {
- 															header('location:data_user.php');
- 														} else {
- 															echo '<script>alert("Data Gagal Tersimpan")</script>';
- 															die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 														}
- 													}
- 													else if ($_POST['jabatan']=='Manager') {
- 														$tipe_user = '2';
- 														$qry = "UPDATE tb_user SET nama='$nama', username='$username', no_hp='$nohp',  password='$password', tipe_user='$tipe_user' WHERE id_user='$id'";
- 														$input = mysqli_query($conn,$qry);
- 														if ($input== true) {
- 															header('location:data_user.php');
- 														} else {
- 															echo '<script>alert("Data Gagal Tersimpan")</script>';
- 															die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 														}
- 													}
- 													else if ($_POST['jabatan']=='Kasir') {
- 														$tipe_user = '3';
- 														$qry = "UPDATE tb_user SET nama='$nama', username='$username', no_hp='$nohp',  password='$password', tipe_user='$tipe_user' WHERE id_user='$id'";
- 														$input = mysqli_query($conn,$qry);
- 														if ($input== true) {
- 															header('location:data_user.php');
- 														} else {
- 															echo '<script>alert("Data Gagal Tersimpan")</script>';
- 															die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 														}
- 													}
- 													else {
- 														echo '<script>alert("Data Gagal Tersimpan")</script>';
- 														die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 													}
- 												}
- 												?>
- 											</div>
- 										</div>
- 									</div>
- 								</div>
- 								<button class="btn">
- 									<a href="?page=datauser&id=<?php echo $user['id_user']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
- 								</button>
- 								<?php
- 								if (isset($_GET['id'])) {
- 									$id = $_GET['id'];
- 									$query = "DELETE FROM tb_user WHERE id_user='$id' ";
- 									$hasil = mysqli_query($conn, $query);
- 									if(!$hasil){
- 										echo '<script>alert("Data Terhapus")</script>';
- 										die ("Gagal menghapus data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 									}
- 								}
- 								?>
- 							</td>
+ 							<td><?= "Rp. ".number_format($barang['jumlah_harga_pokok'],2,',','.') ?></td>
  						</tr>
  					</tbody>
  				<?php endwhile; ?>

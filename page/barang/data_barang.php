@@ -139,8 +139,8 @@
  								<td><?= $barang['nama_barang']; ?></td>
  								<td><?= $barang['nama_kategori'] ?></td>
  								<td><?= $barang['stok'] ?></td>
- 								<td><?= $barang['harga_pokok'] ?></td>
- 								<td><?= $barang['harga_jual'] ?></td>
+ 								<td><?= "Rp. ".number_format($barang['harga_pokok'],2,',','.') ?></td>
+ 								<td><?= "Rp. ".number_format($barang['harga_jual'],2,',','.') ?></td>
  								<td>
  									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUser<?php echo $barang['id_barang'];?>">
  										<i class="fas fa-edit"></i> Edit

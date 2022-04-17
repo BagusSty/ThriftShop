@@ -39,7 +39,7 @@
 					<a href="../../page/laporan/laporan_barang.php">Laporan Barang</a>
 				</li>
  				<li>
- 					<a href="#">Laporan Barang Masuk</a>
+ 					<a href="../../page/laporan/laporan_datamasuk.php">Laporan Barang Masuk</a>
  				</li>
  				<li>
  					<a href="#">Laporan Penjualan</a>
