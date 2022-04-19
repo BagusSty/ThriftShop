@@ -123,7 +123,7 @@
 									//menghitung harga jual
  								$hrg_jual = ($harga*10/100)+$harga;
 									//meupdate stok dan harga barang
- 								$sql=mysqli_query($conn, "SELECT * FROM tb_barang");
+ 								$sql=mysqli_query($conn, "SELECT * FROM tb_barang where id='$id'");
  								$data=mysqli_fetch_array($sql);
  								$stok = $data['stok'];
  								$tmbh_stok = $stok+$jml_brg;

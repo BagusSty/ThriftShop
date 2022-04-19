@@ -16,18 +16,13 @@
 				<li>
 					<a href="../../page/supplier/data_supplier.php"><i class='fas fa-truck'></i> Data Supplier</a>
 				</li>
-			</ul>
-		</li>
-		<li>
-			<a href="#submenu2" data-bs-toggle="collapse"><i class='fas fa-money-check-alt'></i> Data Transaksi</a>
-			<ul class="collapse list-unstyled componenets" id=submenu2 data-bs-parent="#menu">
 				<li>
 					<a href="../../page/barangmasuk/data_barang_masuk.php"><i class='fas fa-box'></i> Data Barang Masuk</a>
 				</li>
-				<li>
-					<a href="../../page/transaksi/transaksi.php"><i class='fas fa-dollar-sign'></i> Data Transaksi</a>
-				</li>
 			</ul>
+		</li>
+		<li>
+			<a href="#"><i class="fas fa-tachometer-alt"></i> Invoice</a>
 		</li>
 		<li>
 			<a href="#submenu3" data-bs-toggle="collapse"><i class="fas fa-clipboard"></i> Laporan</a>

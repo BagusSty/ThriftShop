@@ -138,7 +138,6 @@
  		</table>
  		<?php
  		if (@$tanggal) {
-			var_dump($tanggal);
  			echo '<form action="excel_barang_masuk_harian.php" id="export_tgl" method="post">
  			<input type="hidden" value="'.$tanggal.'" name="tanggal" class="input-tanggal"/>
  			<button type="submit" name=submit class="btn btn-primary"><i class="fa fa-print"></i>Export Excel</button>

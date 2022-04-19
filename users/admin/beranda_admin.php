@@ -136,19 +136,6 @@ include '../../config.php';
                 <a href="../../page/supplier/data_supplier.php"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
             </div>
         </div>
-        <div class="card bg-danger m-4" style="width: 18rem;">
-            <div class="card-body">
-                <div class="card-body-icon text-white">
-                    <i class='fas fa-money-check-alt'></i>
-                </div>
-                <h5 class="card-title">Data Transaksi</h5>
-                <?php
-                $tb_transaksi = mysqli_query($conn, "SELECT * FROM tb_transaksi");
-                echo "<p class='display-4'>".mysqli_num_rows($tb_transaksi)."</p>";
-                ?>
-                <a href="../../page/transaksi/transaksi.php"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
-            </div>
-        </div>
         <div class="card bg-warning m-4" style="width: 18rem;">
             <div class="card-body">
                 <div class="card-body-icon text-white">
