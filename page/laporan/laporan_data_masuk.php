@@ -64,38 +64,38 @@
  					<option value="Bulan">Bulan</option>
  				</select>
  			</div>
-            <div class="m-2">
-                <form style="display: none;" id="tanggal" method="get">
-                    <label for="date1">Tampilkan transaksi tanggal </label>
-                    <div class="col-md-3">
-                        <input type="date" class="form-control form-control-sm" name="tanggal" class="input-tanggal" />
-                    </div>
-                    <button type="submit" name="submit_tanggal" class="btn btn-primary">Tampilkan</button>
- 			    </form>
-            </div>
  			<div class="m-2">
-                <form style="display: none;" id="bulan" method="get">
-                    <label for="date1">Tampilkan transaksi bulan </label>
-                    <div class="col-md-3">
-                        <select class="form-control form-control-sm" name="bulan" class="input-bulan">
-                            <option value="">-</option>
-                            <option value="1">Januari</option>
-                            <option value="2">Februari</option>
-                            <option value="3">Maret</option>
-                            <option value="4">April</option>
-                            <option value="5">Mei</option>
-                            <option value="6">Juni</option>
-                            <option value="7">Juli</option>
-                            <option value="8">Agustus</option>
-                            <option value="9">September</option>
-                            <option value="10">Oktober</option>
-                            <option value="11">November</option>
-                            <option value="12">Desember</option>
-                        </select>
-                    </div>
-                    <button type="submit" name="submit_bulan" class="btn btn-primary">Tampilkan</button>
- 			    </form>
-            </div>
+ 				<form style="display: none;" id="tanggal" method="get">
+ 					<label for="date1">Tampilkan transaksi tanggal </label>
+ 					<div class="col-md-3">
+ 						<input type="date" class="form-control form-control-sm" name="tanggal" class="input-tanggal" />
+ 					</div>
+ 					<button type="submit" name="submit_tanggal" class="btn btn-primary">Tampilkan</button>
+ 				</form>
+ 			</div>
+ 			<div class="m-2">
+ 				<form style="display: none;" id="bulan" method="get">
+ 					<label for="date1">Tampilkan transaksi bulan </label>
+ 					<div class="col-md-3">
+ 						<select class="form-control form-control-sm" name="bulan" class="input-bulan">
+ 							<option value="">-</option>
+ 							<option value="1">Januari</option>
+ 							<option value="2">Februari</option>
+ 							<option value="3">Maret</option>
+ 							<option value="4">April</option>
+ 							<option value="5">Mei</option>
+ 							<option value="6">Juni</option>
+ 							<option value="7">Juli</option>
+ 							<option value="8">Agustus</option>
+ 							<option value="9">September</option>
+ 							<option value="10">Oktober</option>
+ 							<option value="11">November</option>
+ 							<option value="12">Desember</option>
+ 						</select>
+ 					</div>
+ 					<button type="submit" name="submit_bulan" class="btn btn-primary">Tampilkan</button>
+ 				</form>
+ 			</div>
  		</div>
  		<table class="table table-sm">
  			<thead>
@@ -111,18 +111,18 @@
  			</thead>
 
  			<?php
-            if (isset($_GET['submit_tanggal'])) {
-                $tanggal = $_GET['tanggal'];
-                $tb_barang = mysqli_query($conn,"SELECT * FROM tb_barang_masuk,tb_supplier,tb_barang WHERE tb_barang_masuk.id_barang=tb_barang.id_barang AND tb_barang_masuk.id_supplier = tb_supplier.id_supplier AND tanggal='$tanggal'");
-            } elseif (isset($_GET['submit_bulan'])) {
-                $bulan = $_GET['bulan'];
-                $tb_barang = mysqli_query($conn,"SELECT * FROM tb_barang_masuk,tb_supplier,tb_barang WHERE tb_barang_masuk.id_barang=tb_barang.id_barang AND tb_barang_masuk.id_supplier = tb_supplier.id_supplier AND MONTH(tanggal)='$bulan'");
-            } else {
-                $tb_barang = mysqli_query($conn,"SELECT * FROM tb_barang_masuk,tb_supplier,tb_barang WHERE tb_barang_masuk.id_barang=tb_barang.id_barang AND tb_barang_masuk.id_supplier = tb_supplier.id_supplier");
-            }
-                $no = 1;
-                while ($barang = $tb_barang->fetch_assoc()) :
-            ?>
+ 			if (isset($_GET['submit_tanggal'])) {
+ 				$tanggal = $_GET['tanggal'];
+ 				$tb_barang = mysqli_query($conn,"SELECT * FROM tb_barang_masuk,tb_supplier,tb_barang WHERE tb_barang_masuk.id_barang=tb_barang.id_barang AND tb_barang_masuk.id_supplier = tb_supplier.id_supplier AND tanggal='$tanggal'");
+ 			} elseif (isset($_GET['submit_bulan'])) {
+ 				$bulan = $_GET['bulan'];
+ 				$tb_barang = mysqli_query($conn,"SELECT * FROM tb_barang_masuk,tb_supplier,tb_barang WHERE tb_barang_masuk.id_barang=tb_barang.id_barang AND tb_barang_masuk.id_supplier = tb_supplier.id_supplier AND MONTH(tanggal)='$bulan'");
+ 			} else {
+ 				$tb_barang = mysqli_query($conn,"SELECT * FROM tb_barang_masuk,tb_supplier,tb_barang WHERE tb_barang_masuk.id_barang=tb_barang.id_barang AND tb_barang_masuk.id_supplier = tb_supplier.id_supplier");
+ 			}
+ 			$no = 1;
+ 			while ($barang = $tb_barang->fetch_assoc()) :
+ 				?>
  				<tbody>
  					<tr>
  						<td><?= $no++; ?></td>
@@ -136,7 +136,22 @@
  				</tbody>
  			<?php endwhile; ?>
  		</table>
-        <a target="_blank" href="../../page/laporan/excel_laporan_data_barang_masuk.php"  class="btn btn-primary" ><i class="fa fa-print"></i>Export Excel</a>
+ 		<?php
+ 		if (@$tanggal) {
+			var_dump($tanggal);
+ 			echo '<form action="excel_barang_masuk_harian.php" id="export_tgl" method="post">
+ 			<input type="hidden" value="'.$tanggal.'" name="tanggal" class="input-tanggal"/>
+ 			<button type="submit" name=submit class="btn btn-primary"><i class="fa fa-print"></i>Export Excel</button>
+ 			</form>';
+ 		} elseif (@$bulan) {
+ 			echo '<form action="excel_barang_masuk_bulanan.php" id="export_tgl" method="post">
+ 			<input type="hidden" value="'.$bulan.'" name="bulan" class="input-bulan" />
+ 			<button type="submit" name="submit" class="btn btn-primary"><i class="fa fa-print"></i>Export Excel</button>
+ 			</form>';
+ 		} else {
+ 			echo '<a target="_blank" href="../../page/laporan/excel_laporan_data_barang_masuk.php"  class="btn btn-primary" ><i class="fa fa-print"></i>Export Excel</a>';
+ 		}
+ 		?>
  	</div>
  </div>
 </div>
