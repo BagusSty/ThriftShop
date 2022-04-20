@@ -39,13 +39,7 @@
  		?>
  		<!-- Page Content  -->
  		<div id="content">
- 			<?php
- 			if(!isset($_SESSION['tiper_user'])=="1" ){
- 				include_once('../../users/admin/navbar_admin.php');
- 			} elseif (!isset($_SESSION['tiper_user'])=="2" ) {
- 				include_once('../../users/manager/navbar_manager.php');
- 			}
- 			?>
+ 			<?php include_once('../../assets/navbar/navbar.php'); ?>
 
  			<div class="content">
  				<div class="col-md-10 pt-5">
@@ -176,7 +170,7 @@
  													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
  												</div>
  												<div class="modal-body">
- 													<form method="post">
+ 													<form action="update_user.php" method="post">
  														<input type="hidden" name="id_user" value="<?= $user['id_user'];?>">
  														<div class="mb-3">
  															<label for="nama" class="form-label">Nama</label>
@@ -207,71 +201,33 @@
  															<button type="submit" value="Simpan" name="update" class="btn btn-primary">Update</button>
  														</div>
  													</form>
- 													<?php
- 													if (isset($_POST['update'])) {
- 														$id = $_POST['id_user'];
- 														$nama = $_POST['nama'];
- 														$username = $_POST['username'];
- 														$password = md5($_POST['password']);
- 														$nohp = $_POST['no_hp'];
- 														if ($_POST['jabatan']=='Pemilik') {
- 															$tipe_user = '1';
- 															$qry = "UPDATE tb_user SET nama='$nama', username='$username', no_hp='$nohp',  password='$password', tipe_user='$tipe_user' WHERE id_user='$id'";
- 															$input = mysqli_query($conn,$qry);
- 															if ($input== true) {
- 																header('location:data_user.php');
- 															} else {
- 																echo '<script>alert("Data Gagal Tersimpan")</script>';
- 																die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 															}
- 														}
- 														else if ($_POST['jabatan']=='Manager') {
- 															$tipe_user = '2';
- 															$qry = "UPDATE tb_user SET nama='$nama', username='$username', no_hp='$nohp',  password='$password', tipe_user='$tipe_user' WHERE id_user='$id'";
- 															$input = mysqli_query($conn,$qry);
- 															if ($input== true) {
- 																header('location:data_user.php');
- 															} else {
- 																echo '<script>alert("Data Gagal Tersimpan")</script>';
- 																die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 															}
- 														}
- 														else if ($_POST['jabatan']=='Kasir') {
- 															$tipe_user = '3';
- 															$qry = "UPDATE tb_user SET nama='$nama', username='$username', no_hp='$nohp',  password='$password', tipe_user='$tipe_user' WHERE id_user='$id'";
- 															$input = mysqli_query($conn,$qry);
- 															if ($input== true) {
- 																header('location:data_user.php');
- 															} else {
- 																echo '<script>alert("Data Gagal Tersimpan")</script>';
- 																die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 															}
- 														}
- 														else {
- 															echo '<script>alert("Data Gagal Tersimpan")</script>';
- 															die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 														}
- 													}
- 													?>
  												</div>
  											</div>
  										</div>
  									</div>
- 									<button class="btn">
- 										<a href="?id=<?php echo $user['id_user']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
+ 									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteUser<?php echo $user['id_user'];?>">
+ 										<i class="fas fa-trash"></i> Hapus
  									</button>
- 									<?php
- 									if (isset($_GET['id'])) {
- 										$id = $_GET['id'];
- 										$query = "DELETE FROM tb_user WHERE id_user='$id' ";
- 										$hasil = mysqli_query($conn, $query);
- 										if(!$hasil){
- 											die ("Gagal menghapus data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 										} else {
-											 echo '<script>alert("Data Terhapus")</script>';
-										 }
- 									}
- 									?>
+ 									<!-- Modal Delete -->
+ 									<div class="modal fade" id="deleteUser<?php echo $user['id_user'];?>" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
+ 										<div class="modal-dialog">
+ 											<div class="modal-content">
+ 												<div class="modal-header">
+ 													<h5 class="modal-title" id="editUserLabel">Hapus Data</h5>
+ 													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+ 												</div>
+ 												<div class="modal-body">
+ 													<form action="hapus_user.php" method="post">
+ 														<input type="hidden" name="id_user" value="<?= $user['id_user'];?>">
+ 														<div class="modal-footer">
+ 															<button type="submit" data-bs-dismiss="modal" class="btn-danger">Tidak</button>
+ 															<button type="submit" value="delete" name="delete" class="btn-primary">Hapus</button>
+ 														</div>
+ 													</form>
+ 												</div>
+ 											</div>
+ 										</div>
+ 									</div>
  								</td>
  							</tr>
  						</tbody>

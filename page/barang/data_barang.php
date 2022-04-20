@@ -39,13 +39,7 @@
  		?>
  		<!-- Page Content  -->
  		<div id="content">
- 			<?php
- 			if(!isset($_SESSION['tiper_user'])=="1" ){
- 				include_once('../../users/admin/navbar_admin.php');
- 			} elseif (!isset($_SESSION['tiper_user'])=="2" ) {
- 				include_once('../../users/manager/navbar_manager.php');
- 			}
- 			?>
+ 			<?php include_once('../../assets/navbar/navbar.php'); ?>
 
  			<div class="content">
  				<div class="col-md-10 pt-5">
@@ -62,7 +56,7 @@
  								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
  							</div>
  							<div class="modal-body">
- 								<form method="post">
+ 								<form method="post" enctype="multipart/form-data">
  									<div class="mb-3">
  										<label for="nama" class="form-label">Nama</label>
  										<input type="text" name="nama" class="form-control" required>
@@ -81,35 +75,35 @@
  											?>
  										</select>
  										<div class="mb-3">
- 											<label for="stok" class="form-label">Stok</label>
- 											<input type="number" name="stok" class="form-control" disabled>
- 										</div>
- 										<div class="mb-3">
- 											<label for="harga_pokok" class="form-label">Harga Pokok</label>
- 											<input type="number" name="harga_pokok" class="form-control" disabled>
- 										</div>
- 										<div class="mb-3">
- 											<label for="harga_jual" class="form-label">Harga Jual</label>
- 											<input type="number" name="harga_jual" class="form-control" disabled>
+ 											<label for="file" class="form-label">Masukkan Gambar</label>
+ 											<input type="file" name="gambar" class="form-control" accept="image/png, image/jpeg" required>
  										</div>
  									</div>
  									<div class="modal-footer">
  										<button type="submit" value="Simpan" name="tambah" class="btn btn-primary">Simpan</button>
  									</div>
  								</form>
- 								<?php if (isset($_POST['tambah'])) {
+ 								<?php
+ 								if (isset($_POST['tambah'])) {
+ 									$ekstensi_diperbolehkan = array('png','jpg');
  									$nama = $_POST['nama'];
  									$kategori = $_POST['kategori'];
- 									$stok = $_POST['stok'];
- 									$hrg_pokok = $_POST['harga_pokok'];
- 									$hrg_jual = $_POST['harga_jual'];
- 									$qry = "INSERT INTO tb_barang(nama_barang,id_kategori,stok,harga_pokok,harga_jual) VALUES ('$nama','$kategori','$stok','$hrg_pokok','$hrg_jual' )";
- 									$input = mysqli_query($conn,$qry);
- 									if ($input== true) {
- 										echo '<script>alert("Data Tersimpan")</script>';
- 									} else {
- 										echo '<script>alert("Data Gagal Tersimpan")</script>';
- 										die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
+ 									$filename = $_FILES['gambar']['name'];
+									//mengatur ekstensi foto
+ 									$ext = pathinfo($filename, PATHINFO_EXTENSION);
+ 									$file_tmp = $_FILES['gambar']['tmp_name'];
+ 									if(in_array($ext, $ekstensi_diperbolehkan) === true) {
+ 										move_uploaded_file($file_tmp, '../../assets/file/'.$filename);
+ 										//Insert data ke database
+ 										$qry = "INSERT INTO tb_barang(nama_barang,id_kategori,gambar) VALUES ('$nama','$kategori','$filename')";
+ 										$input = mysqli_query($conn,$qry);
+ 										if ($input== true) {
+ 											header("Location: data_barang.php");
+ 											echo '<script>alert("Data Tersimpan")</script>';
+ 										} else {
+ 											echo '<script>alert("Data Gagal Tersimpan")</script>';
+ 											die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
+ 										}
  									}
  								}
  								?>
@@ -130,13 +124,13 @@
  						</tr>
  					</thead>
  					<?php
- 					$tb_barang = mysqli_query($conn,"SELECT * FROM tb_barang,tb_kategori");
+ 					$tb_barang = mysqli_query($conn,"SELECT * FROM tb_barang,tb_kategori WHERE tb_barang.id_kategori=tb_kategori.id_kategori");
  					$no = 1;
  					while ($barang = $tb_barang->fetch_assoc()) : ?>
  						<tbody>
  							<tr>
  								<td><?= $no++; ?></td>
- 								<td><?= $barang['nama_barang']; ?></td>
+ 								<td><?= $barang['nama_barang'] ?></td>
  								<td><?= $barang['nama_kategori'] ?></td>
  								<td><?= $barang['stok'] ?></td>
  								<td><?= "Rp. ".number_format($barang['harga_pokok'],2,',','.') ?></td>
@@ -154,7 +148,7 @@
  													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
  												</div>
  												<div class="modal-body">
- 													<form method="post">
+ 													<form action="update_barang.php" method="post" enctype="multipart/form-data">
  														<input type="hidden" name="id_barang" value="<?= $barang['id_barang'] ?>">
  														<div class="mb-3">
  															<label for="nama" class="form-label">Nama</label>
@@ -174,6 +168,10 @@
  																?>
  															</select>
  														</div>
+ 														<div class="mb-3">
+ 															<label for="file" class="form-label">Masukkan Gambar</label>
+ 															<input type="file" name="gambar" class="form-control" accept="image/png, image/jpeg" required>
+ 														</div>
  														<div class="modal-footer">
  															<button type="submit" value="Simpan" name="edit" class="btn btn-primary">Simpan</button>
  														</div>
@@ -182,36 +180,29 @@
  											</div>
  										</div>
  									</div>
- 									<?php
- 									if (isset($_POST['edit'])) {
- 										$id = $_POST['id_barang'];
- 										$nama = $_POST['nama_barang'];
- 										$kategori = $_POST['nama_kategori'];
- 										$qry = "UPDATE tb_barang SET nama_barang='$nama', id_kategori='$kategori' WHERE id_barang='$id'";
- 										$input = mysqli_query($conn,$qry);
- 										if ($input== true) {
- 											echo '<script>alert("Data Tersimpan")</script>';
- 										} else {
- 											echo '<script>alert("Data Gagal Tersimpan")</script>';
- 											die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 										}
- 									}
- 									?>
- 									<button class="btn">
- 										<a href="?id=<?php echo $barang['id_barang']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
+ 									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete<?php echo $barang['id_barang'];?>">
+ 										<i class="fas fa-trash"></i> Hapus
  									</button>
- 									<?php
- 									if (isset($_GET['id'])) {
- 										$id = $_GET['id'];
- 										$query = "DELETE FROM tb_barang WHERE id_barang='$id' ";
- 										$hasil = mysqli_query($conn, $query);
- 										if(!$hasil){
- 											die ("Gagal menghapus data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 										} else {
- 											echo '<script>alert("Data Terhapus")</script>';
- 										}
- 									}
- 									?>
+ 									<!-- Modal Delete -->
+ 									<div class="modal fade" id="delete<?php echo $barang['id_barang'];?>" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
+ 										<div class="modal-dialog">
+ 											<div class="modal-content">
+ 												<div class="modal-header">
+ 													<h5 class="modal-title" id="editUserLabel">Hapus Data</h5>
+ 													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+ 												</div>
+ 												<div class="modal-body">
+ 													<form action="hapus_barang.php" method="post">
+ 														<input type="hidden" name="id_barang" value="<?= $barang['id_barang'];?>">
+ 														<div class="modal-footer">
+ 															<button type="submit" data-bs-dismiss="modal" class="btn-danger">Tidak</button>
+ 															<button type="submit" value="delete" name="delete" class="btn-primary">Hapus</button>
+ 														</div>
+ 													</form>
+ 												</div>
+ 											</div>
+ 										</div>
+ 									</div>
  								</td>
  							</tr>
  						</tbody>

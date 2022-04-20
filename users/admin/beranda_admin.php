@@ -38,7 +38,7 @@ include '../../config.php';
 
         <!-- Page Content  -->
         <div id="content">
-            <?php include_once('navbar_admin.php'); ?>
+            <?php include_once('../../assets/navbar/navbar.php'); ?>
             <div class="content">
               <div class="mt-5">
     <!--PHP Tanggal-->

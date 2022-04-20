@@ -39,13 +39,7 @@
  		?>
  		<!-- Page Content  -->
  		<div id="content">
- 			<?php
- 			if(!isset($_SESSION['tiper_user'])=="1" ){
- 				include_once('../../users/admin/navbar_admin.php');
- 			} elseif (!isset($_SESSION['tiper_user'])=="2" ) {
- 				include_once('../../users/manager/navbar_manager.php');
- 			}
- 			?>
+ 			<?php include_once('../../assets/navbar/navbar.php'); ?>
 
  			<div class="col-md-10 pt-5">
  				<h2><i class='fas fa-box'></i> Data Barang Masuk</h2>
@@ -132,6 +126,7 @@
  								if ($input == true) {
  									$upd = "UPDATE tb_barang SET stok='$tmbh_stok',harga_pokok='$harga', harga_jual='$hrg_jual' WHERE id_barang='$id'";
  									$update = mysqli_query($conn,$upd);
+									header("Location: data_barang_masuk.php");
  								} else {
  									echo '<script>alert("Data Gagal Tersimpan")</script>';
  									var_dump($qry);

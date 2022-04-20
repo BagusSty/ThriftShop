@@ -33,4 +33,3 @@ header("Content-Disposition: attachment; filename=Laporan_Data_Barang_Masuk.xls"
 		</tbody>
 	<?php endwhile; ?>
 </table>
-

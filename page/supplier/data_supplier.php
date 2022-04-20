@@ -13,8 +13,8 @@
  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
  	<title>Beranda</title>
-     <!-- JQuery-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ 	<!-- JQuery-->
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
  	<!--Data Tables-->
  	<link rel="stylesheet" type="text/css" href="../../assets/DataTables/datatables.min.css"/>
@@ -39,13 +39,7 @@
  		?>
  		<!-- Page Content  -->
  		<div id="content">
- 			<?php
- 			if(!isset($_SESSION['tiper_user'])=="1" ){
- 				include_once('../../users/admin/navbar_admin.php');
- 			} elseif (!isset($_SESSION['tiper_user'])=="2" ) {
- 				include_once('../../users/manager/navbar_manager.php');
- 			}
- 			?>
+ 			<?php include_once('../../assets/navbar/navbar.php'); ?>
 
  			<div class="col-md-10 pt-5">
  				<h2><i class='fas fa-truck'></i> Data Supplier</h2>
@@ -134,7 +128,7 @@
  												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
  											</div>
  											<div class="modal-body">
- 												<form method="post">
+ 												<form action="update_supplier.php" method="post">
  													<input type="hidden" name="id_supplier" value="<?= $supp['id_supplier'];?>">
  													<div class="mb-3">
  														<label for="nama" class="form-label">Nama</label>
@@ -152,39 +146,33 @@
  														<button type="submit" value="update" name="update" class="btn btn-primary">Update</button>
  													</div>
  												</form>
- 												<?php
- 												if (isset($_POST['update'])) {
- 													$id = $_POST['id_supplier'];
- 													$nama = $_POST['nama'];
- 													$nohp = $_POST['no_hp'];
- 													$alamat = $_POST['alamat'];
- 													$qry = "UPDATE tb_supplier SET nama_supplier='$nama', no_hp_supplier='$nohp',  alamat_supplier='$alamat' WHERE id_supplier='$id'";
- 													$input = mysqli_query($conn,$qry);
- 													if ($input== true) {
- 														echo '<script>alert("Data Tersimpan")</script>';
- 													} else {
- 														echo '<script>alert("Data Gagal Tersimpan")</script>';
- 														die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 													}
- 												}
- 												?>
  											</div>
  										</div>
  									</div>
  								</div>
- 								<button class="btn">
- 									<a href="?id=<?php echo $supp['id_supplier']?>" onclick="return confirm('anda yakin akan menghapus data?')"><i class="fas fa-trash"></i>Hapus</span></a>
+ 								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteUser<?php echo $supp['id_supplier'];?>">
+ 									<i class="fas fa-trash"></i> Hapus
  								</button>
- 								<?php
- 								if (isset($_GET['id'])) {
- 									$id = $_GET['id'];
- 									$query = "DELETE FROM tb_supplier WHERE id_supplier='$id' ";
- 									$hasil = mysqli_query($conn, $query);
- 									if(!$hasil){
- 										die ("Gagal menghapus data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
- 									}
- 								}
- 								?>
+ 								<!-- Modal Delete -->
+ 								<div class="modal fade" id="deleteUser<?php echo $supp['id_supplier'];?>" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
+ 									<div class="modal-dialog">
+ 										<div class="modal-content">
+ 											<div class="modal-header">
+ 												<h5 class="modal-title" id="editUserLabel">Hapus Data</h5>
+ 												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+ 											</div>
+ 											<div class="modal-body">
+ 												<form action="hapus_supplier.php" method="post">
+ 													<input type="hidden" name="id_supplier" value="<?= $supp['id_supplier'];?>">
+ 													<div class="modal-footer">
+ 														<button type="submit" data-bs-dismiss="modal" class="btn-danger">Tidak</button>
+ 														<button type="submit" value="delete" name="delete" class="btn-primary">Hapus</button>
+ 													</div>
+ 												</form>
+ 											</div>
+ 										</div>
+ 									</div>
+ 								</div>
  							</td>
  						</tr>
  					</tbody>

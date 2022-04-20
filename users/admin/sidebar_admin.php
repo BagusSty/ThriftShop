@@ -17,6 +17,9 @@
 					<a href="../../page/barang/data_barang.php"><i class='fas fa-tshirt'></i> Data Barang</a>
 				</li>
 				<li>
+					<a href="../../page/kategori/data_kategori.php"><i class="fas fa-columns"></i> Data Kategori</a>
+				</li>
+				<li>
 					<a href="../../page/supplier/data_supplier.php"><i class='fas fa-truck'></i> Data Supplier</a>
 				</li>
 				<li>
@@ -25,7 +28,7 @@
  			</ul>
  		</li>
 		 <li>
- 			<a href="#"><i class="fas fa-tachometer-alt"></i> Invoice</a>
+ 			<a href="#"><i class="fas fa-file"></i> Invoice</a>
  		</li>
  		<li>
  			<a href="#submenu3" data-bs-toggle="collapse"><i class="fas fa-clipboard"></i> Laporan</a>
