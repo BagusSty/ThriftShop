@@ -78,8 +78,8 @@
  										<select name="jabatan" class="form-control" required>
  											<option value="">--Pilih Jabatan--</option>
  											<option value="Pemilik">Pemilik</option>
- 											<option value="Manager">Manager</option>
- 											<option value="Kasir">Kasir</option>
+ 											<option value="Karyawan">Karyawan</option>
+ 											<option value="User">User</option>
  										</select>
  									</div>
  									<div class="modal-footer">
@@ -102,7 +102,7 @@
  											die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
  										}
  									}
- 									else if ($_POST['jabatan']=='Manager') {
+ 									else if ($_POST['jabatan']=='Karyawan') {
  										$qry = "INSERT INTO tb_user(nama,username,no_hp,password,tipe_user) VALUES ('$nama','$username','$nohp','$password','2')";
  										$input = mysqli_query($conn,$qry);
  										if ($input== true) {
@@ -112,7 +112,7 @@
  											die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
  										}
  									}
- 									else if ($_POST['jabatan']=='Kasir') {
+ 									else if ($_POST['jabatan']=='User') {
  										$qry = "INSERT INTO tb_user(nama,username,no_hp,password,tipe_user) VALUES ('$nama','$username','$nohp','$password','3')";
  										$input = mysqli_query($conn,$qry);
  										if ($input== true) {
