@@ -15,7 +15,7 @@
 
  	<title>Beranda</title>
  	<!-- JQuery-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
  	<!--Data Tables-->
  	<link rel="stylesheet" type="text/css" href="../../assets/DataTables/datatables.min.css"/>
@@ -32,7 +32,7 @@
  <body>
  	<div class="wrapper">
  		<!-- Sidebar  -->
- 		<?php include_once('sidebar_karyawan.php'); ?>
+ 		<?php include_once('sidebar_user.php'); ?>
  		<!-- Page Content  -->
  		<div id="content">
  			<?php include_once('../../assets/navbar/navbar.php'); ?>
@@ -94,32 +94,46 @@
  					}
  					?>
  					<hr>
- 					<div class="row text-white">
-
+					<?php
+ 					$tb_brg = mysqli_query($conn,"SELECT * FROM tb_barang,tb_kategori WHERE tb_barang.id_kategori=tb_kategori.id_kategori");
+ 					$no = 1;
+ 					while ($dt_brg = $tb_brg->fetch_assoc()) : ?>
+ 					<div class="col-md-4">
+ 						<div class="card">
+ 							<img class="img-center"
+ 							src="../../assets/file/<?= $dt_brg['gambar']?>"
+ 							class="card-img-top" alt="..."
+							 width="200px">
+ 							<div class="card-body">
+ 								<h5 class="card-title"><a href="" class="text-dark "><?= $dt_brg['nama_barang'] ?></a></h5>
+								 <h3 class="card-text"><?= "Rp. ".number_format($dt_brg['harga_jual'],2,',','.') ?></h3>
+					 </div>
  					</div>
  				</div>
+				<?php endwhile; ?>
  			</div>
  		</div>
  	</div>
+ </div>
 
- 	<!--Data Tables JS-->
- 	<script type="text/javascript" src="../../assets/DataTables/datatables.min.js"></script>
- 	<!-- Popper.JS -->
- 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
- 	<!-- Bootstrap JS -->
- 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
- 	<script type="text/javascript">
- 		$(document).ready(function () {
- 			$('#sidebarCollapse').on('click', function () {
- 				$('#sidebar').toggleClass('active');
- 			});
+ <!--Data Tables JS-->
+ <script type="text/javascript" src="../../assets/DataTables/datatables.min.js"></script>
+ <!-- Popper.JS -->
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+ <!-- Bootstrap JS -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+ <script type="text/javascript">
+ 	$(document).ready(function () {
+ 		$('#sidebarCollapse').on('click', function () {
+ 			$('#sidebar').toggleClass('active');
  		});
- 	</script>
- 	<script type="text/javascript">
- 		$(document).ready( function () {
- 			$('.table').DataTable();
- 		})
- 	</script>
- </body>
+ 	});
+ </script>
+ <script type="text/javascript">
+ 	$(document).ready( function () {
+ 		$('.table').DataTable();
+ 	})
+ </script>
+</body>
 
- </html>
+</html>
