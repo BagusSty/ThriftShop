@@ -5,10 +5,10 @@
 	<hr>
 	<ul class="list-unstyled components">
 		<li>
-			<a href="../../users/user/beranda_user.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+			<a href="beranda_user.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
 		</li>
 		<li>
-			<a href="../../page/transaksi/cart.php"><i class="fas fa-shopping-cart"></i> Keranjang</a>
+			<a href="cart.php"><i class="fas fa-shopping-cart"></i> Keranjang</a>
 		</li>
 		<hr>
 		<li>

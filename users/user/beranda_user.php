@@ -1,7 +1,7 @@
  <?php
  session_start();
  include '../../config.php';
- if(!isset ($_SESSION['nama']) && !isset($_SESSION['tiper_user'])=="2" ){
+ if(!isset ($_SESSION['nama']) ){
  	header("Location:../../index.php");
  }
  ?>
@@ -94,23 +94,51 @@
  					}
  					?>
  					<hr>
-					<?php
- 					$tb_brg = mysqli_query($conn,"SELECT * FROM tb_barang,tb_kategori WHERE tb_barang.id_kategori=tb_kategori.id_kategori");
- 					$no = 1;
- 					while ($dt_brg = $tb_brg->fetch_assoc()) : ?>
- 					<div class="col-md-4">
- 						<div class="card">
- 							<img class="img-center"
- 							src="../../assets/file/<?= $dt_brg['gambar']?>"
- 							class="card-img-top" alt="..."
-							 width="200px">
- 							<div class="card-body">
- 								<h5 class="card-title"><a href="" class="text-dark "><?= $dt_brg['nama_barang'] ?></a></h5>
-								 <h3 class="card-text"><?= "Rp. ".number_format($dt_brg['harga_jual'],2,',','.') ?></h3>
-					 </div>
+ 					<?php if (isset($_SESSION['pesan'])) {
+ 						echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+ 						' . $_SESSION['pesan'] . '
+ 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+ 						<span aria-hidden="true">×</span>
+ 						</button>
+ 						</div>';
+
+ 						unset($_SESSION['pesan']);
+ 					}?>
+ 					<div class="row">
+ 						<?php
+ 						$tb_brg = mysqli_query($conn,"SELECT * FROM tb_barang,tb_kategori WHERE tb_barang.id_kategori=tb_kategori.id_kategori");
+ 						$no = 1;
+ 						while ($dt_brg = $tb_brg->fetch_assoc()) : ?>
+ 							<div class="col-sm-3 p-2">
+ 								<form method="post" action="cart.php">
+ 									<input type="hidden" name="id" value="<?= $dt_brg['id_barang']; ?>"></input>
+ 									<div class="card">
+ 										<div class="text-center"><img class="card-img-center"
+ 											src="../../assets/file/<?= $dt_brg['gambar']?>"
+ 											class="card-img-top" alt="..."
+ 											width="150px">
+ 											<div class="card-body">
+ 												<h3 class="card-title"><a href="" class="text-dark "><?= $dt_brg['nama_barang'] ?></a></h3>
+ 												<span class="card-text">Kategori : <?= $dt_brg['nama_kategori'] ?></span>
+ 												<div class="mb-2">
+ 													<article><?= "Rp. ".number_format($dt_brg['harga_jual'],2,',','.') ?></article>
+ 												</div>
+ 											</div>
+ 										</div>
+
+ 										<div class="card-footer">
+ 											<div class="col-md-8">
+ 												<button type="submit" name="submit" class="btn btn-sm" id="addToCart-1">
+ 													<i class="fas fa-shopping-cart"></i>Add To Cart
+ 												</button>
+ 											</div>
+ 										</div>
+ 									</div>
+ 								</form>
+ 							</div>
+ 						<?php endwhile; ?>
  					</div>
  				</div>
-				<?php endwhile; ?>
  			</div>
  		</div>
  	</div>
