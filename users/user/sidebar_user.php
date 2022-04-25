@@ -8,7 +8,7 @@
 			<a href="beranda_user.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
 		</li>
 		<li>
-			<a href="cart.php"><i class="fas fa-shopping-cart"></i> Keranjang</a>
+			<a href="cart1.php"><i class="fas fa-shopping-cart"></i> Keranjang</a>
 		</li>
 		<hr>
 		<li>

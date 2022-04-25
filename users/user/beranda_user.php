@@ -110,8 +110,8 @@
  						$no = 1;
  						while ($dt_brg = $tb_brg->fetch_assoc()) : ?>
  							<div class="col-sm-3 p-2">
- 								<form method="post" action="cart.php">
- 									<input type="hidden" name="id" value="<?= $dt_brg['id_barang']; ?>"></input>
+ 								<form method="post" action="cart1.php">
+ 									<input type="hidden" name="id_produk" value="<?= $dt_brg['id_barang']; ?>"></input>
  									<div class="card">
  										<div class="text-center"><img class="card-img-center"
  											src="../../assets/file/<?= $dt_brg['gambar']?>"
@@ -127,10 +127,13 @@
  										</div>
 
  										<div class="card-footer">
- 											<div class="col-md-8">
- 												<button type="submit" name="submit" class="btn btn-sm" id="addToCart-1">
+ 											<div class="input-group mb-3">
+ 												<input type="number" class="form-control" name="pembelian" value="1" min="1" max="<?= $dt_brg['stok']; ?>">
+ 												<div class="input-group-append">
+ 													<button type="submit" name="submit" class="btn btn-sm" id="addToCart-1">
  													<i class="fas fa-shopping-cart"></i>Add To Cart
  												</button>
+ 												</div>
  											</div>
  										</div>
  									</div>
