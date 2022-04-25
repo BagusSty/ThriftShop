@@ -28,7 +28,7 @@
  			</ul>
  		</li>
 		 <li>
- 			<a href="#"><i class="fas fa-file"></i> Invoice</a>
+ 			<a href="../../page/invoice/invoice.php"><i class="fas fa-file"></i> Invoice</a>
  		</li>
  		<li>
  			<a href="#submenu3" data-bs-toggle="collapse"><i class="fas fa-clipboard"></i> Laporan</a>

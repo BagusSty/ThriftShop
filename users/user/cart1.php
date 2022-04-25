@@ -164,7 +164,7 @@ if (!empty($_SESSION['cart'])) {
                          <option value="">--Pilih Pembayaran--</option>
                          <option value="Mandiri">Mandiri</option>
                          <option value="BCA">BCA</option>
-                         <option value="BRIs">BRI</option>
+                         <option value="BRI">BRI</option>
                        </select>
                      </div>
                      <div class="modal-footer">

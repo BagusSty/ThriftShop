@@ -58,7 +58,7 @@
  						</tr>
  					</thead>
  					<?php
- 					$tb_barang = mysqli_query($conn,"SELECT * FROM tb_barang,tb_kategori");
+ 					$tb_barang = mysqli_query($conn,"SELECT * FROM tb_barang,tb_kategori WHERE tb_barang.id_kategori=tb_kategori.id_kategori");
  					$no = 1;
  					while ($barang = $tb_barang->fetch_assoc()) : ?>
  						<tbody>
