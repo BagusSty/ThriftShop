@@ -42,9 +42,6 @@
  				<li>
  					<a href="#">Laporan Penjualan</a>
  				</li>
- 				<li>
- 					<a href="#">Laporan Keuangan</a>
- 				</li>
  			</ul>
  		</li>
  		<hr>
