@@ -9,39 +9,44 @@
   <link rel="stylesheet" href="css/stylesheet.css" />
 </head>
 <body>
-  <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
-    <div class="card border-0 m-3 p-4 border-0">
-      <div class="row d-flex p-5">
+  <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-4 py-4 mx-auto">
+    <div class="card border-0 m-3 p-3 border-0">
+      <div class="row d-flex p-4">
         <div class="col-lg-6">
           <img class="img img-fluid" src="assets/img/3255317.jpg" alt="" />
         </div>
         <div class="col-lg-6">
-          <!--Form Login-->
-          <form class="form form-group p-sm-5" action="proses_login.php" method="post">
+          <!--Form Register-->
+          <form class="form form-group p-sm-5" action="proses_register.php" method="post">
             <div class="row px-3">
-              <h2 class="title"><b>LOGIN</b></h2>
+              <h2 class="title"><b>REGISTER</b></h2>
+            </div>
+            <div class="row px-3">
+              <label for="nama" class="mb-1 text-sm">Nama </label>
+              <input type="text" class="form-control mb-2" autocomplete="off" name="nama" required/>
             </div>
             <div class="row px-3">
               <label for="username" class="mb-1 text-sm">Username </label>
-              <input type="text" autocomplete="off" class="form-control mb-2" name="username" />
+              <input type="text" class="form-control mb-2" autocomplete="off" name="username" required/>
+            </div>
+            <div class="row px-3">
+              <label for="no_hp" class="mb-1 text-sm">No HP </label>
+              <input type="tel" class="form-control mb-2" autocomplete="off" name="no_hp" placeholder="08xxxxxxxxxx" pattern="08[0-9]{10}" maxlength="15" required/>
             </div>
             <div class="row px-3">
               <label for="password" class="mb-1 text-sm">Password </label>
               <input
-              type="password"
-              class="form-control mb-2"
-              name="password"
-              />
+              type="password" class="form-control mb-2" name="password" required/>
             </div>
             <div class="row mt-4 justify-content-center">
               <button type="submit" name="submit" class="btn btn-primary">
-                <b>Login</b>
+                <b>Register</b>
               </button>
             </div>
           </form>
           <div class="row px-3">
-            <p> Belum punya akun?
-              <a href="register.php">Register di sini</a>
+            <p> Sudah memiliki akun?
+              <a href="login.php">Login di sini</a>
             </p>
           </div>
         </div>
