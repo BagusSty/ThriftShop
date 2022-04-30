@@ -32,7 +32,11 @@ a:focus {
   right: 0;
   left: 0;
   z-index: 20;
-  background-color: #54bab9;
+  background: linear-gradient(
+    166deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
   margin-bottom: 40px;
 }
 .navbar .dropdown button {
@@ -54,7 +58,11 @@ a:focus {
 #sidebar {
   min-width: 200px;
   max-width: 200px;
-  background: #54bab9;
+  background: linear-gradient(
+    166deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
   color: #fff;
   transition: all 0.3s;
 }
@@ -78,7 +86,11 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-  color: #54bab9;
+  color: linear-gradient(
+    166deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
   background: #fff;
 }
 #sidebar span {
@@ -90,7 +102,11 @@ a:focus {
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: #54bab9;
+  background: linear-gradient(
+    166deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
 }
 
 /* ---------------------------------------------------
@@ -115,7 +131,11 @@ ul ul a {
   font-size: 80px;
 }
 #content .btn {
-  background-color: #54bab9;
+  background: linear-gradient(
+    166deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
 }
 
 /* ---------------------------------------------------

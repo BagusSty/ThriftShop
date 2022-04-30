@@ -5,7 +5,7 @@
 			<i class="fas fa-align-left"></i>
 		</button>
 		<div class="dropdown">
-			<button class="btn dropdown-toggle" type="button" id="dropdown-profil" data-bs-toggle="dropdown" aria-expanded="false">
+			<button style="background: transparent;" class="btn dropdown-toggle" type="button" id="dropdown-profil" data-bs-toggle="dropdown" aria-expanded="false">
 				<i class="fa fa-fw fa-user"></i> <?php echo $_SESSION['nama']; ?>
 			</button>
 			<ul class="dropdown-menu" aria-labelledby="dropdown-profil">
