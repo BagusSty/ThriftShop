@@ -7,7 +7,8 @@ if(!isset ($_SESSION['nama']) ){
 
 if (isset($_POST['ya'])) {
 	$no = $_POST['no'];
-	$qry = "UPDATE tb_transaksi SET status='Sudah Dibayar' WHERE no_transaksi='$no'";
+	$bayar = date('Y-m-d H:i:s');
+	$qry = "UPDATE tb_transaksi SET waktu_bayar='$bayar',status='Sudah Dibayar' WHERE no_transaksi='$no'";
 	$input = mysqli_query($conn,$qry);
 	if ($input== true) {
 		header('Location: invoice.php');
@@ -16,7 +17,7 @@ if (isset($_POST['ya'])) {
 		echo '<script>alert("Pembayaran Gagal Terkonfirmasi")</script>';
 		die ("Gagal menginput data: ".mysqli_errno($conn)." - ".mysqli_error($conn));
 	}
-} elseif (isset($_POST['batas']) == date('Y-m-d H:i:s')) {
+} elseif (isset($_POST['ya']) && isset($_POST['batas']) == date('Y-m-d H:i:s')) {
 	$no = $_POST['no'];
 	$qry = "UPDATE tb_transaksi SET status='Kadaluarsa' WHERE no_transaksi='$no'";
 	$input = mysqli_query($conn,$qry);

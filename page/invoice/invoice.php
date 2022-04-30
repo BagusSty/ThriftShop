@@ -50,91 +50,91 @@
  						<tr>
  							<th>Kode Transaksi</th>
  							<th>Nama Pemesan</th>
-                            <th>Pembayaran</th>
-                            <th>Total Barang</th>
-                            <th>Total Pembayaran</th>
-                            <th>Waktu Pesan</th>
-                            <th>Batas Pembayaran</th>
-                            <th>Status Pembayaran</th>
-                            <th>Opsi</th>
-                        </tr>
-                    </thead>
+              <th>Pembayaran</th>
+              <th>Total Barang</th>
+              <th>Total Pembayaran</th>
+              <th>Waktu Pesan</th>
+              <th>Batas Pembayaran</th>
+              <th>Status Pembayaran</th>
+              <th>Opsi</th>
+            </tr>
+          </thead>
+          <?php
+          $tb_transaksi = mysqli_query($conn,"SELECT * FROM tb_user,tb_transaksi WHERE tb_user.id_user=tb_transaksi.id_user");
+          while ($data = $tb_transaksi->fetch_assoc()) : ?>
+           <tbody>
+            <tr>
+             <td><?= $data['kode']; ?></td>
+             <td><?= $data['nama']; ?></td>
+             <td><?= $data['pembayaran']; ?></td>
+             <td><?= $data['total_barang']; ?></td>
+             <td><?=  "Rp. ".number_format($data['total_bayar'],2,',','.') ?></td>
+             <td><?= $data['waktu_pesan']; ?></td>
+             <td><?= $data['batas_bayar']; ?></td>
+             <td><?= $data['status']; ?></td>
+             <td>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail<?php echo $data['no_transaksi'];?>">
+               Detail
+             </button>
+             <!-- Modal Details -->
+             <div class="modal fade" id="detail<?php echo $data['no_transaksi'];?>" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
+               <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                 <div class="modal-header">
+                  <h5 class="modal-title" id="editUserLabel">Detail Order</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <table  class="table table-striped">
+                   <tr>
+                    <th>Kode Transaksi</th>
+                    <th>Nama Barang</th>
+                    <th>Jumlah Beli</th>
+                    <th>Total Harga</th>
+                  </tr>
+                  <?php
+                  $tb_detail = mysqli_query($conn,"SELECT * FROM tb_barang,tb_transaksi,tb_transaksi_detail WHERE tb_transaksi_detail.no_transaksi = '$data[no_transaksi]' AND tb_barang.id_barang=tb_transaksi_detail.id_barang AND tb_transaksi.no_transaksi=tb_transaksi_detail.no_transaksi");
+                  while ($detail=mysqli_fetch_array($tb_detail)) {
+                    ?>
+                    <tr>
+                      <td><?= $detail['kode']; ?></td>
+                      <td><?= $detail['nama_barang']; ?></td>
+                      <td><?= $detail['pembelian']; ?></td>
+                      <td><?= "Rp. ".number_format($detail['pembelian']*$detail['harga_jual'],2,',','.') ?></td>
+                    </tr>
                     <?php
-                    $tb_transaksi = mysqli_query($conn,"SELECT * FROM tb_user,tb_transaksi WHERE tb_user.id_user=tb_transaksi.id_user");
-                    while ($data = $tb_transaksi->fetch_assoc()) : ?>
-                     <tbody>
-                        <tr>
-                           <td><?= $data['kode']; ?></td>
-                           <td><?= $data['nama']; ?></td>
-                           <td><?= $data['pembayaran']; ?></td>
-                           <td><?= $data['total_barang']; ?></td>
-                           <td><?=  "Rp. ".number_format($data['total_bayar'],2,',','.') ?></td>
-                           <td><?= $data['waktu_pesan']; ?></td>
-                           <td><?= $data['batas_bayar']; ?></td>
-                           <td><?= $data['status']; ?></td>
-                           <td>
-                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail<?php echo $data['no_transaksi'];?>">
-                                 Detail
-                             </button>
-                             <!-- Modal Details -->
-                             <div class="modal fade" id="detail<?php echo $data['no_transaksi'];?>" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
-                                 <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                       <div class="modal-header">
-                                          <h5 class="modal-title" id="editUserLabel">Detail Order</h5>
-                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                      </div>
-                                      <div class="modal-body">
-                                          <table  class="table table-striped">
-                                           <tr>
-                                            <th>Kode Transaksi</th>
-                                            <th>Nama Barang</th>
-                                            <th>Jumlah Beli</th>
-                                            <th>Total Harga</th>
-                                        </tr>
-                                         <?php
-                                       $tb_detail = mysqli_query($conn,"SELECT * FROM tb_barang,tb_transaksi,tb_transaksi_detail WHERE tb_transaksi_detail.no_transaksi = '$data[no_transaksi]' AND tb_barang.id_barang=tb_transaksi_detail.id_barang AND tb_transaksi.no_transaksi=tb_transaksi_detail.no_transaksi");
-                                       while ($detail=mysqli_fetch_array($tb_detail)) {
-                                          ?>
-                                        <tr>
-                                            <td><?= $detail['kode']; ?></td>
-                                            <td><?= $detail['nama_barang']; ?></td>
-                                            <td><?= $detail['pembelian']; ?></td>
-                                            <td><?= "Rp. ".number_format($detail['pembelian']*$detail['harga_jual'],2,',','.') ?></td>
-                                        </tr>
-                                    <?php
-                                }
-                                ?>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirm<?php echo $data['no_transaksi'];?>">
-                    Konfirmasi
-                </button>
-             <!-- Modal Konfirmasi -->
-             <div class="modal fade" id="confirm<?php echo $data['no_transaksi'];?>" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
-                 <div class="modal-dialog">
-                    <div class="modal-content">
-                       <div class="modal-header">
-                          <h5 class="modal-title" id="editUserLabel">Konfirmasi Pembayaran</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                          <form action="confirm.php" method="post">
-                              <input type="hidden" name="batas" value="<?= $data['batas_bayar'];?>">
-                             <input type="hidden" name="no" value="<?= $data['no_transaksi'];?>">
-                             <div class="modal-footer">
-                                <button type="submit" data-bs-dismiss="modal" class="btn-danger">Tidak</button>
-                                <button type="submit" value="ya" name="ya" class="btn-primary">Ya</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                  }
+                  ?>
+                </table>
+              </div>
             </div>
+          </div>
         </div>
-    </td>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirm<?php echo $data['no_transaksi'];?>">
+          Konfirmasi
+        </button>
+        <!-- Modal Konfirmasi -->
+        <div class="modal fade" id="confirm<?php echo $data['no_transaksi'];?>" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
+         <div class="modal-dialog">
+          <div class="modal-content">
+           <div class="modal-header">
+            <h5 class="modal-title" id="editUserLabel">Konfirmasi Pembayaran</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="confirm.php" method="post">
+              <input type="hidden" name="batas" value="<?= $data['batas_bayar'];?>">
+              <input type="hidden" name="no" value="<?= $data['no_transaksi'];?>">
+              <div class="modal-footer">
+                <button type="submit" data-bs-dismiss="modal" class="btn-danger">Tidak</button>
+                <button type="submit" value="ya" name="ya" class="btn-primary">Ya</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </td>
 </tr>
 </tbody>
 <?php endwhile; ?>
@@ -150,14 +150,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 <script type="text/javascript">
  $(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-       $('#sidebar').toggleClass('active');
-   });
+  $('#sidebarCollapse').on('click', function () {
+   $('#sidebar').toggleClass('active');
+ });
 });
 </script>
 <script type="text/javascript">
  $(document).ready( function () {
-    $('.table').DataTable();
+  $('.table').DataTable();
 })
 </script>
 </body>
