@@ -14,14 +14,14 @@ if (isset($_POST['submit'])) {
 		$_POST['username'] = $username;
     	$_POST['password'] = $password;
 		$_SESSION['nama'] = $cek['nama'];
-		$_SESSION['tipe_user']=$cek['tipe_user'];
+		$_SESSION['tipe_user']="1";
 		header("location:users/admin/beranda_admin.php");
 	}
 	else if($cek['tipe_user']=="2") {
 		$_POST['username'] = $username;
      	$_POST['password'] = $password;
 		$_SESSION['nama'] = $cek['nama'];
-		$_SESSION['tipe_user']=$cek['tipe_user'];
+		$_SESSION['tipe_user']="2";
 		header("location:users/karyawan/beranda_karyawan.php");
 
 	}
@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
 		$_POST['username'] = $username;
     	$_POST['password'] = $password;
 		$_SESSION['nama'] = $cek['nama'];
-		$_SESSION['tipe_user']=$cek['tipe_user'];
+		$_SESSION['tipe_user']="3";
 		header("location:users/user/beranda_user.php");
 	} else {
 		echo '<script>alert("Gagal Login")</script>';
