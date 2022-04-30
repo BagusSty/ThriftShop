@@ -9,7 +9,7 @@
 				<i class="fa fa-fw fa-user"></i> <?php echo $_SESSION['nama']; ?>
 			</button>
 			<ul class="dropdown-menu" aria-labelledby="dropdown-profil">
-				<li><a class="dropdown-item" href="#"><i class="fa fa-fw fa-user"></i> Profil</a></li>
+				<li><a class="dropdown-item" href="../../page/profil/profil.php"><i class="fa fa-fw fa-user"></i> Profil</a></li>
 				<li><a class="dropdown-item" href="../../logout.php" onclick="return confirm('Anda yakin ingin logout ?')" ><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
 			</ul>
 		</div>
