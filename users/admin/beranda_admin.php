@@ -18,6 +18,20 @@ include '../../config.php';
     <title>Beranda</title>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
+    <!--CSS Style-->
+    <style>
+        .card {
+            background:linear-gradient(
+                166deg,
+                rgba(238, 174, 202, 1) 0%,
+                rgba(148, 187, 233, 1) 100%
+            );
+        }
+        .display-4 {
+            color: black;
+        };
+    </style>
+
     <!--Data Tables-->3
     <link rel="stylesheet" type="text/css" href="../../assets/DataTables/datatables.min.css"/>
 
@@ -96,10 +110,10 @@ include '../../config.php';
     }
     ?>
     <hr>
-    <div class="row text-white">
-        <div class="card bg-info m-4" style="width: 18rem;">
+    <div class="row">
+        <div class="card m-4" style="width: 16rem;">
             <div class="card-body">
-                <div class="card-body-icon text-white">
+                <div class="card-body-icon">
                     <i class="fas fa-tshirt"></i>
                 </div>
                 <h5 class="card-title">Data Barang</h5>
@@ -107,12 +121,25 @@ include '../../config.php';
                 $tb_barang = mysqli_query($conn, "SELECT * FROM tb_barang");
                 echo "<p class='display-4'>".mysqli_num_rows($tb_barang)."</p>";
                 ?>
-                <a href="../../page/barang/data_barang.php"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
+                <a href="../../page/barang/data_barang.php"><p style="color: black;" class="card-text">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
             </div>
         </div>
-        <div class="card bg-success m-4" style="width: 18rem;">
+        <div class="card m-4" style="width: 16rem;">
             <div class="card-body">
-                <div class="card-body-icon text-white">
+                <div class="card-body-icon">
+                    <i class="fas fa-columns"></i>
+                </div>
+                <h5 class="card-title">Data Kategori</h5>
+                <?php
+                $tb_kategori = mysqli_query($conn, "SELECT * FROM tb_kategori");
+                echo "<p class='display-4'>".mysqli_num_rows($tb_kategori)."</p>";
+                ?>
+                <a href="../../page/kategori/data_kategori.php"><p style="color: black;" class="card-text">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
+            </div>
+        </div>
+        <div class="card m-4" style="width: 16rem;">
+            <div class="card-body">
+                <div class="card-body-icon">
                     <i class='fas fa-user'></i>
                 </div>
                 <h5 class="card-title">Data User</h5>
@@ -120,12 +147,12 @@ include '../../config.php';
                 $tb_user = mysqli_query($conn, "SELECT * FROM tb_user");
                 echo "<p class='display-4'>".mysqli_num_rows($tb_user)."</p>";
                 ?>
-                <a href="../../page/user/data_user.php"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
+                <a href="../../page/user/data_user.php"><p  style="color: black;" class="card-text">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
             </div>
         </div>
-        <div class="card bg-secondary m-4" style="width: 18rem;">
+        <div class="card m-4" style="width: 16rem;">
             <div class="card-body">
-                <div class="card-body-icon text-white">
+                <div class="card-body-icon">
                     <i class='fas fa-truck'></i>
                 </div>
                 <h5 class="card-title">Data Supplier</h5>
@@ -133,12 +160,12 @@ include '../../config.php';
                 $tb_supplier = mysqli_query($conn, "SELECT * FROM tb_supplier");
                 echo "<p class='display-4'>".mysqli_num_rows($tb_supplier)."</p>";
                 ?>
-                <a href="../../page/supplier/data_supplier.php"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
+                <a href="../../page/supplier/data_supplier.php"><p  style="color: black;" class="card-text">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
             </div>
         </div>
-        <div class="card bg-warning m-4" style="width: 18rem;">
+        <div class="card m-4" style="width: 16rem;">
             <div class="card-body">
-                <div class="card-body-icon text-white">
+                <div class="card-body-icon">
                     <i class='fas fa-box'></i>
                 </div>
                 <h5 class="card-title">Data Barang Masuk</h5>
@@ -146,7 +173,20 @@ include '../../config.php';
                 $tb_barang_masuk = mysqli_query($conn, "SELECT * FROM tb_barang_masuk");
                 echo "<p class='display-4'>".mysqli_num_rows($tb_barang_masuk)."</p>";
                 ?>
-                <a href="../../page/barangmasuk/data_barang_masuk.php"><p class="card-text text-white">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
+                <a href="../../page/barangmasuk/data_barang_masuk.php"><p  style="color: black;" class="card-text">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
+            </div>
+        </div>
+        <div class="card m-4" style="width: 16rem;">
+            <div class="card-body">
+                <div class="card-body-icon">
+                    <i class='fas fa-file'></i>
+                </div>
+                <h5 class="card-title">Invoice</h5>
+                <?php
+                $invoice = mysqli_query($conn, "SELECT * FROM tb_transaksi");
+                echo "<p class='display-4'>".mysqli_num_rows($invoice)."</p>";
+                ?>
+                <a href="../../page/invoice/invoice.php"><p  style="color: black;" class="card-text">Lihat Detail <i class="fas fa-angle-double-right ml-2"></i></p></a>
             </div>
         </div>
     </div>
