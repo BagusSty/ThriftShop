@@ -11,14 +11,13 @@ body {
 }
 .card {
   height: 100%;
-  border-radius: 20px;
 }
 .col-lg-6 .img {
   width: 90%;
   align-self: center;
 }
 .form {
-  background-color: #c7c7c7;
+  background-color: #d7d7d7;
   border-radius: 20px;
 }
 .btn {
