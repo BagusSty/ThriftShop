@@ -12,15 +12,15 @@
     @media (max-width: 768px) {
       .text {
         font-size:smaller;
-      }
-      img {
-        display: none;
-      }
-      small {
-        font-size:xx-small;
-      }
     }
-  </style>
+    img {
+        display: none;
+    }
+    small {
+        font-size:xx-small;
+    }
+}
+</style>
 </head>
 <body>
   <div class="container-fluid px-xl-5 py-3 mx-auto">
@@ -28,51 +28,51 @@
       <div class="row d-flex">
         <div class="col-lg-6">
           <img class="img img-fluid" src="assets/img/3255317.jpg" alt="" />
-        </div>
-        <div class="col-lg-6">
+      </div>
+      <div class="col-lg-6">
           <!--Form Register-->
           <form class="form form-group p-sm-5" action="proses_register.php" method="post">
             <div class="row px-3">
               <h2 class="title"><b>REGISTER</b></h2>
-            </div>
-            <div class="row px-3">
+          </div>
+          <div class="row px-3">
               <label for="nama" class="mb-1 text text-sm">Nama </label>
               <input type="text" class="form-control mb-2" autocomplete="off" name="nama" required/>
-            </div>
-            <div class="row px-3">
+          </div>
+          <div class="row px-3">
               <label for="username" class="mb-1 text text-sm">Username </label>
               <input type="text" class="form-control mb-2" autocomplete="off"  name="username" required/>
-            </div>
-            <div class="row px-3">
+          </div>
+          <div class="row px-3">
               <label for="no_hp" class="mb-1 text text-sm">No HP (08xxxxxxxxxx)</label>
               <input type="tel" class="form-control mb-2" autocomplete="off" name="no_hp" pattern="08[0-9]{10}" maxlength="15" required/>
-            </div>
-            <div class="row px-3">
+          </div>
+          <div class="row px-3">
               <label for="password" class="mb-1 text text-sm">Password </label>
               <input
               type="password" class="form-control mb-2" name="password" required/>
-            </div>
-            <div class="row pb-3 mt-4 justify-content-center">
+          </div>
+          <div class="row pb-3 mt-4 justify-content-center">
               <button type="submit" name="submit" class="btn btn-primary">
                 <b>Register</b>
-              </button>
-            </div>
-          </form>
-          <div class="row px-3">
-            <p class="text"> Sudah memiliki akun?
-              <a href="login.php">Login di sini</a>
-            </p>
-          </div>
+            </button>
         </div>
-      </div>
-      <div class="row px-3 text-center">
-        <footer>
-          <small class="ml-sm-5 mb-2"
-          >Copyright &copy; 2022. All rights reserved.</small
-          >
-        </footer>
-      </div>
-    </div>
+    </form>
+    <div class="row px-3">
+        <p class="text"> Sudah memiliki akun?
+          <a href="login.php">Login di sini</a>
+      </p>
   </div>
+</div>
+</div>
+<div class="row px-3 text-center">
+    <footer>
+      <small class="ml-sm-5 mb-2"
+      >Copyright &copy; 2022. All rights reserved.</small
+      >
+  </footer>
+</div>
+</div>
+</div>
 </body>
 </html>
