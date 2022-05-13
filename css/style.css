@@ -143,13 +143,28 @@ ul ul a {
 ----------------------------------------------------- */
 
 @media (max-width: 768px) {
+  span {
+    display: none;
+  }
   #sidebar {
-    margin-left: -250px;
+    margin-left: -200px;
+    height: auto;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    width: 200px;
+    z-index: 10;
   }
   #sidebar.active {
     margin-left: 0;
   }
   #sidebarCollapse span {
     display: none;
+  }
+  .card {
+    width: 8rem;
+  }
+  .card-body-icon i {
+    width: 75%;
   }
 }

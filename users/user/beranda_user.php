@@ -20,6 +20,20 @@
  	<!--Data Tables-->
  	<link rel="stylesheet" type="text/css" href="../../assets/DataTables/datatables.min.css"/>
 
+	<!--CSS Style -->
+ 	<style>
+		@media (max-width: 768px) {
+		.card-body {
+			font-size: smaller;
+		}
+		img {
+			width: 75px;
+		}
+		.card-title {
+			font-size:medium;
+		}
+		}
+	</style>
  	<!--Bootstrap-->
  	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <!--CSS-->
  	<link rel="stylesheet" href="../../css/style.css">
@@ -109,18 +123,17 @@
  						$tb_brg = mysqli_query($conn,"SELECT * FROM tb_barang,tb_kategori WHERE tb_barang.id_kategori=tb_kategori.id_kategori");
  						$no = 1;
  						while ($dt_brg = $tb_brg->fetch_assoc()) : ?>
- 							<div class="col-sm-3 p-2">
+ 							<div class="card col-sm-3 mx-2">
  								<form method="post" action="cart1.php">
  									<input type="hidden" name="id_produk" value="<?= $dt_brg['id_barang']; ?>"></input>
- 									<div class="card">
  										<div class="text-center"><img class="card-img-center"
  											src="../../assets/file/<?= $dt_brg['gambar']?>"
  											class="card-img-top" alt="..."
  											width="150px">
  											<div class="card-body">
- 												<h3 class="card-title"><a href="" class="text-dark "><?= $dt_brg['nama_barang'] ?></a></h3>
+ 												<h3 class="card-title"><?= $dt_brg['nama_barang'] ?></h3>
  												<span class="card-text">Kategori : <?= $dt_brg['nama_kategori'] ?></span>
- 												<div class="mb-2">
+ 												<div class="">
  													<article><?= "Rp. ".number_format($dt_brg['harga_jual'],2,',','.') ?></article>
  												</div>
  											</div>
@@ -129,14 +142,15 @@
  										<div class="card-footer">
  											<div class="input-group mb-3">
  												<input type="number" class="form-control" name="pembelian" value="1" min="1" max="<?= $dt_brg['stok']; ?>">
- 												<div class="input-group-append">
+ 												<br>
+												 <div class="input-group-append">
  													<button type="submit" name="submit" class="btn btn-sm" id="addToCart-1">
  													<i class="fas fa-shopping-cart"></i>Add To Cart
  												</button>
  												</div>
  											</div>
  										</div>
- 									</div>
+
  								</form>
  							</div>
  						<?php endwhile; ?>
