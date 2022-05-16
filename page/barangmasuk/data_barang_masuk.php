@@ -105,7 +105,6 @@
               </div>
             </form>
             <?php
-            include '../../config.php';
             if (isset($_POST['tambah'])) {
               $id = $_POST['id_barang'];
               $supplier = $_POST['supplier'];
@@ -117,7 +116,7 @@
                   //menghitung harga jual
               $hrg_jual = ($harga*10/100)+$harga;
                   //meupdate stok dan harga barang
-              $sql=mysqli_query($conn, "SELECT * FROM tb_barang where id='$id'");
+              $sql=mysqli_query($conn, "SELECT * FROM tb_barang where id_barang='$id'");
               $data=mysqli_fetch_array($sql);
               $stok = $data['stok'];
               $tmbh_stok = $stok+$jml_brg;

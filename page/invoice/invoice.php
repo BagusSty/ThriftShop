@@ -85,7 +85,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <table  class="table table-striped">
+                <div class="table-responsive">
+                   <table  class="table table-striped ">
                  <tr>
                   <th>Kode Transaksi</th>
                   <th>Nama Barang</th>
@@ -106,6 +107,7 @@
                 }
                 ?>
               </table>
+                </div>
             </div>
           </div>
         </div>

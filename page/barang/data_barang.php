@@ -111,7 +111,7 @@
           </div>
         </div>
       </div>
-      <table class="table table-striped">
+      <table class="table table-striped mx-auto">
         <thead>
           <tr>
             <th>No</th>
@@ -225,8 +225,12 @@
   });
 </script>
 <script type="text/javascript">
-  $(document).ready( function () {
-    $('.table').DataTable();
-  })
+  $(document).ready(function() {
+    var table = $('.table').DataTable( {
+        responsive: true
+    } );
+
+    new $.fn.dataTable.FixedHeader( table );
+} );
 </script>
 </body>
