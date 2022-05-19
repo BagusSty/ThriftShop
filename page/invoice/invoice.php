@@ -3,7 +3,9 @@
  include '../../config.php';
  if(!isset ($_SESSION['nama']) ){
   header("Location:../../index.php");
-}
+ }
+   $expired = "UPDATE tb_transaksi SET status='Kadaluarsa' WHERE batas_bayar > CURRENT_DATE AND status='Belum Dibayar'";
+  $expire = mysqli_query($conn, $expired);
 ?>
 <!DOCTYPE html>
 <html>
