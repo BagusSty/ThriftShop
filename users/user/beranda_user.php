@@ -20,20 +20,23 @@
  	<!--Data Tables-->
  	<link rel="stylesheet" type="text/css" href="../../assets/DataTables/datatables.min.css"/>
 
-	<!--CSS Style -->
+ 	<!--CSS Style -->
  	<style>
-		@media (max-width: 768px) {
-		.card-body {
-			font-size: smaller;
+		.navbar-nav .nav-link {
+			color: black;
 		}
-		img {
-			width: 75px;
-		}
-		.card-title {
-			font-size:medium;
-		}
-		}
-	</style>
+ 		@media (max-width: 768px) {
+ 			.card-body {
+ 				font-size: smaller;
+ 			}
+ 			img {
+ 				width: 75px;
+ 			}
+ 			.card-title {
+ 				font-size:medium;
+ 			}
+ 		}
+ 	</style>
  	<!--Bootstrap-->
  	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <!--CSS-->
  	<link rel="stylesheet" href="../../css/style.css">
@@ -45,11 +48,27 @@
 
  <body>
  	<div class="wrapper">
- 		<!-- Sidebar  -->
- 		<?php include_once('sidebar_user.php'); ?>
  		<!-- Page Content  -->
  		<div id="content">
- 			<?php include_once('../../assets/navbar/navbar.php'); ?>
+			<!-- Navbar -->
+ 			<nav class="navbar navbar-expand-lg">
+ 				<div class="container-fluid">
+ 					<a class="navbar-brand" href="#">Buganishogi</a>
+ 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+ 						<i class="fas fa-align-left"></i>
+ 					</button>
+ 					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+ 						<div class="navbar-nav">
+ 							<a class="nav-link active" aria-current="page" href="beranda_user.php">Dashboard</a>
+ 							<a class="nav-link" href="#">Katalog</a>
+							<a href="#" class="nav-link">Riwayat Pembelian</a>
+ 							<a class="nav-link" href="cart1.php">Keranjang</a>
+ 							<a class="nav-link" href="#">Akun Anda</a>
+		 					<a onclick="return confirm('Anda yakin ingin logout ?')" href="../../logout.php" class="nav-link">Log Out</a>
+ 						</div>
+ 					</div>
+ 				</div>
+ 			</nav>
 
  			<div class="content">
  				<div class="mt-5">
@@ -126,30 +145,30 @@
  							<div class="card col-sm-3 mx-2">
  								<form method="post" action="cart1.php">
  									<input type="hidden" name="id_produk" value="<?= $dt_brg['id_barang']; ?>"></input>
- 										<div class="text-center"><img class="card-img-center"
- 											src="../../assets/file/<?= $dt_brg['gambar']?>"
- 											class="card-img-top" alt="..."
- 											width="150px">
- 											<div class="card-body">
- 												<h3 class="card-title"><?= $dt_brg['nama_barang'] ?></h3>
- 												<span class="card-text">Kategori : <?= $dt_brg['nama_kategori'] ?></span>
- 												<div class="">
- 													<article><?= "Rp. ".number_format($dt_brg['harga_jual'],2,',','.') ?></article>
- 												</div>
+ 									<div class="text-center"><img class="card-img-center"
+ 										src="../../assets/file/<?= $dt_brg['gambar']?>"
+ 										class="card-img-top" alt="..."
+ 										width="150px">
+ 										<div class="card-body">
+ 											<h3 class="card-title"><?= $dt_brg['nama_barang'] ?></h3>
+ 											<span class="card-text">Kategori : <?= $dt_brg['nama_kategori'] ?></span>
+ 											<div class="">
+ 												<article><?= "Rp. ".number_format($dt_brg['harga_jual'],2,',','.') ?></article>
  											</div>
  										</div>
+ 									</div>
 
- 										<div class="card-footer">
- 											<div class="input-group mb-3">
- 												<input type="number" class="form-control" name="pembelian" value="1" min="1" max="<?= $dt_brg['stok']; ?>">
- 												<br>
-												 <div class="input-group-append">
- 													<button type="submit" name="submit" class="btn btn-sm" id="addToCart-1">
+ 									<div class="card-footer">
+ 										<div class="input-group mb-3">
+ 											<input type="number" class="form-control" name="pembelian" value="1" min="1" max="<?= $dt_brg['stok']; ?>">
+ 											<br>
+ 											<div class="input-group-append">
+ 												<button type="submit" name="submit" class="btn btn-sm" id="addToCart-1">
  													<i class="fas fa-shopping-cart"></i>Add To Cart
  												</button>
- 												</div>
  											</div>
  										</div>
+ 									</div>
 
  								</form>
  							</div>
