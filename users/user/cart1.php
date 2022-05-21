@@ -80,7 +80,7 @@ if (!empty($_SESSION['cart'])) {
 						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 							<div class="navbar-nav">
 								<a class="nav-link active" aria-current="page" href="beranda_user.php">Dashboard</a>
-								<a class="nav-link" href="#">Katalog</a>
+								<a class="nav-link" href="katalog.php">Katalog</a>
 								<a href="#" class="nav-link">Riwayat Pembelian</a>
 								<a class="nav-link" href="cart1.php">Keranjang</a>
 								<a class="nav-link" href="#">Akun Anda</a>
