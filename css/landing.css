@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
+* {
+  font-family: "PT Sans";
+  top: 0;
+}
+a,
+a:hover,
+a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.navbar {
+  font-family: "Roboto";
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+  background: #dda3b2;
+}
+.navbar .dropdown button {
+  margin-right: 40px;
+}
+.dropdown-toggle::after {
+  content: none;
+}
+.header {
+  padding: 200px 0 150px 0;
+  background: #eeaeca;
+  font-weight: bold;
+}
+.text-uppercase {
+  font-size: 75px;
+  font-weight: bolder;
+}
+.hr-lines {
+  position: relative;
+  max-width: 450px;
+  margin: 80px auto;
+  text-align: center;
+}
+
+.hr-lines:before {
+  content: " ";
+  height: 2px;
+  width: 120px;
+  background: #eeaeca;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.hr-lines:after {
+  content: " ";
+  height: 2px;
+  width: 120px;
+  background: #eeaeca;
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+.row {
+  justify-content: center;
+}
+.row .card {
+  border-radius: 20px;
+  background-color: #dfe2cf;
+  padding: 10px;
+}
+.row .card img {
+  border-radius: 10px;
+}
+.location {
+  display: flex;
+  flex-wrap: wrap;
+}
+.location-info {
+  width: 40%;
+}
+.location-map {
+  width: 50%;
+  margin-left: 50px;
+}
+.footer {
+  color: white;
+  background-color: #764248;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+.logo {
+  color: wheat;
+}
+object {
+  filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(349deg)
+    brightness(104%) contrast(100%);
+}
+object:hover {
+  filter: invert(0%) sepia(0%) saturate(7482%) hue-rotate(87deg)
+    brightness(104%) contrast(105%);
+}
